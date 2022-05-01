@@ -14,7 +14,7 @@ public final class MainTabViewController: UITabBarController {
     }
 
     private func setupViewControllers() {
-        let listVC = ParkListViewController()
+        let listVC = UINavigationController(rootViewController: ParkListViewController())
         listVC.tabBarItem = UITabBarItem(
             title: L10n.TabTitle.list,
             image: UIImage(systemName: "list.bullet"),

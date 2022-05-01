@@ -25,9 +25,14 @@ let package = Package(
         .target(
             name: "ListFeature",
             dependencies: [
+                "UICore",
                 "Repositories",
                 "Persistence",
             ]
+        ),
+        .target(
+            name: "UICore",
+            dependencies: []
         ),
         .target(
             name: "Repositories",

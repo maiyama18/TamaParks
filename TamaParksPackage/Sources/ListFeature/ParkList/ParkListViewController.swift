@@ -1,3 +1,4 @@
+import UICore
 import UIKit
 
 public final class ParkListViewController: UIViewController {
@@ -7,5 +8,6 @@ public final class ParkListViewController: UIViewController {
         super.viewDidLoad()
 
         viewModel.onViewLoaded()
+        hostSwiftUIView(ParkListScreen(viewModel: viewModel))
     }
 }

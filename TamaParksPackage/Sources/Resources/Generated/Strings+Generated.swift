@@ -11,6 +11,11 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 public enum L10n {
 
+  public enum ParkList {
+    /// 未訪問
+    public static let unvisited = L10n.tr("Localizable", "park_list.unvisited")
+  }
+
   public enum TabTitle {
     /// 一覧
     public static let list = L10n.tr("Localizable", "tab_title.list")
