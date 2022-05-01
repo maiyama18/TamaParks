@@ -10,15 +10,18 @@ let package = Package(
     products: [
         .library(
             name: "App",
-            targets: ["App"]),
+            targets: ["App"]
+        ),
     ],
     dependencies: [],
     targets: [
         .target(
             name: "App",
-            dependencies: []),
+            dependencies: []
+        ),
         .target(
             name: "Persistence",
-            dependencies: []),
+            dependencies: []
+        ),
     ]
 )
