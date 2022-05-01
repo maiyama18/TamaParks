@@ -18,7 +18,21 @@ let package = Package(
         .target(
             name: "App",
             dependencies: [
+                "ListFeature",
                 "Resources",
+            ]
+        ),
+        .target(
+            name: "ListFeature",
+            dependencies: [
+                "Repositories",
+                "Persistence",
+            ]
+        ),
+        .target(
+            name: "Repositories",
+            dependencies: [
+                "Persistence",
             ]
         ),
         .target(

@@ -1,3 +1,4 @@
+import ListFeature
 import Resources
 import UIKit
 
@@ -13,7 +14,7 @@ public final class MainTabViewController: UITabBarController {
     }
 
     private func setupViewControllers() {
-        let listVC = UIViewController()
+        let listVC = ParkListViewController()
         listVC.tabBarItem = UITabBarItem(
             title: L10n.TabTitle.list,
             image: UIImage(systemName: "list.bullet"),

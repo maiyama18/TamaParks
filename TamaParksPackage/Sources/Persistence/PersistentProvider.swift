@@ -6,9 +6,13 @@ public final class PersistentProvider {
     public let persistentContainer: NSPersistentCloudKitContainer
 
     private init() {
-        persistentContainer = NSPersistentCloudKitContainer(name: "TamaParks")
+        let modelURL = Bundle.module.url(forResource: "TamaParks", withExtension: "momd")!
+        let model = NSManagedObjectModel(contentsOf: modelURL)!
+        persistentContainer = NSPersistentCloudKitContainer(name: "TamaParks", managedObjectModel: model)
 
-        let description = NSPersistentStoreDescription()
+        let storeDirectory = NSPersistentCloudKitContainer.defaultDirectoryURL()
+        let storeURL = storeDirectory.appendingPathComponent("Synced.sqlite")
+        let description = NSPersistentStoreDescription(url: storeURL)
         description.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.com.muijp.TamaParks")
         description.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
         description.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
