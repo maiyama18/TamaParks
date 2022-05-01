@@ -1,0 +1,8 @@
+strings:
+  inputs:
+    - TamaParksPackage/Sources/Resources/Localizable.strings
+  outputs:
+    - templateName: structured-swift5
+      params:
+        publicAccess: true
+      output: TamaParksPackage/Sources/Resources/Generated/Strings+Generated.swift

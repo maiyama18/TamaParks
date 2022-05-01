@@ -1,4 +1,6 @@
+import Resources
 import UIKit
+
 public final class MainTabViewController: UITabBarController {
     enum Tab: Int {
         case list
@@ -13,7 +15,7 @@ public final class MainTabViewController: UITabBarController {
     private func setupViewControllers() {
         let listVC = UIViewController()
         listVC.tabBarItem = UITabBarItem(
-            title: "一覧",
+            title: L10n.TabTitle.list,
             image: UIImage(systemName: "list.bullet"),
             tag: Tab.list.rawValue
         )
