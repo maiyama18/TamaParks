@@ -1,16 +1,9 @@
-//
-//  PersistentProvider.swift
-//  TamaParks
-//
-//  Created by maiyama on 2022/05/01.
-//
-
 import CoreData
 
-final class PersistentProvider {
-    static let shared: PersistentProvider = .init()
+public final class PersistentProvider {
+    public static let shared: PersistentProvider = .init()
     
-    let persistentContainer: NSPersistentCloudKitContainer
+    public let persistentContainer: NSPersistentCloudKitContainer
     
     private init() {
         persistentContainer = NSPersistentCloudKitContainer(name: "TamaParks")

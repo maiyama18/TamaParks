@@ -9,23 +9,18 @@
 /* Begin PBXBuildFile section */
 		38624773281E7E2900065D07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38624772281E7E2900065D07 /* AppDelegate.swift */; };
 		38624775281E7E2900065D07 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38624774281E7E2900065D07 /* SceneDelegate.swift */; };
-		38624777281E7E2900065D07 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38624776281E7E2900065D07 /* ViewController.swift */; };
-		3862477D281E7E2900065D07 /* TamaParks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3862477B281E7E2900065D07 /* TamaParks.xcdatamodeld */; };
 		3862477F281E7E2A00065D07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3862477E281E7E2A00065D07 /* Assets.xcassets */; };
 		38624782281E7E2A00065D07 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38624780281E7E2A00065D07 /* LaunchScreen.storyboard */; };
-		3862478D281E852B00065D07 /* PersistentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3862478C281E852B00065D07 /* PersistentProvider.swift */; };
+		38624790281E892100065D07 /* App in Frameworks */ = {isa = PBXBuildFile; productRef = 3862478F281E892100065D07 /* App */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3862476F281E7E2900065D07 /* TamaParks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TamaParks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38624772281E7E2900065D07 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38624774281E7E2900065D07 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		38624776281E7E2900065D07 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		3862477C281E7E2900065D07 /* TamaParks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TamaParks.xcdatamodel; sourceTree = "<group>"; };
 		3862477E281E7E2A00065D07 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		38624783281E7E2A00065D07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3862478B281E82C600065D07 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ja; path = ja.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		3862478C281E852B00065D07 /* PersistentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38624790281E892100065D07 /* App in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +40,7 @@
 			children = (
 				38624771281E7E2900065D07 /* TamaParks */,
 				38624770281E7E2900065D07 /* Products */,
+				3862478E281E892100065D07 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,14 +57,18 @@
 			children = (
 				38624772281E7E2900065D07 /* AppDelegate.swift */,
 				38624774281E7E2900065D07 /* SceneDelegate.swift */,
-				38624776281E7E2900065D07 /* ViewController.swift */,
-				3862478C281E852B00065D07 /* PersistentProvider.swift */,
 				3862477E281E7E2A00065D07 /* Assets.xcassets */,
 				38624780281E7E2A00065D07 /* LaunchScreen.storyboard */,
 				38624783281E7E2A00065D07 /* Info.plist */,
-				3862477B281E7E2900065D07 /* TamaParks.xcdatamodeld */,
 			);
 			path = TamaParks;
+			sourceTree = "<group>";
+		};
+		3862478E281E892100065D07 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -86,6 +87,9 @@
 			dependencies = (
 			);
 			name = TamaParks;
+			packageProductDependencies = (
+				3862478F281E892100065D07 /* App */,
+			);
 			productName = TamaParks;
 			productReference = 3862476F281E7E2900065D07 /* TamaParks.app */;
 			productType = "com.apple.product-type.application";
@@ -139,10 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38624777281E7E2900065D07 /* ViewController.swift in Sources */,
 				38624773281E7E2900065D07 /* AppDelegate.swift in Sources */,
-				3862478D281E852B00065D07 /* PersistentProvider.swift in Sources */,
-				3862477D281E7E2900065D07 /* TamaParks.xcdatamodeld in Sources */,
 				38624775281E7E2900065D07 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -356,18 +357,12 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCVersionGroup section */
-		3862477B281E7E2900065D07 /* TamaParks.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				3862477C281E7E2900065D07 /* TamaParks.xcdatamodel */,
-			);
-			currentVersion = 3862477C281E7E2900065D07 /* TamaParks.xcdatamodel */;
-			path = TamaParks.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
+/* Begin XCSwiftPackageProductDependency section */
+		3862478F281E892100065D07 /* App */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = App;
 		};
-/* End XCVersionGroup section */
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 38624767281E7E2900065D07 /* Project object */;
 }
