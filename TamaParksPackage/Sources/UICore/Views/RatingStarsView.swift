@@ -10,10 +10,10 @@ public struct RatingStarsView: View {
     }
 
     public var body: some View {
-        HStack(spacing: 1) {
+        HStack(spacing: 0) {
             ForEach(1 ... 5, id: \.self) { i in
                 Image(systemName: "star")
-                    .font(.system(size: 14))
+                    .font(.system(size: 18))
                     .symbolVariant(rating >= i ? .fill : .none)
                     .foregroundColor(.green)
                     .onTapGesture {
