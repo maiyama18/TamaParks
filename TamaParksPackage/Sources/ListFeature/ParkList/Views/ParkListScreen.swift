@@ -9,7 +9,7 @@ struct ParkListScreen: View {
                 ForEach(viewModel.parks, id: \.objectID) { park in
                     ParkListItemRow(
                         park: park,
-                        onRatingTapped: { _ in }
+                        onRatingTapped: { rating in viewModel.onParkRated(park, rating: rating) }
                     )
                     .id(park.viewID)
                     .contentShape(Rectangle())

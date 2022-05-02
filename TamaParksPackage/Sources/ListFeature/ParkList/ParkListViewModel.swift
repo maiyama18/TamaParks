@@ -56,6 +56,15 @@ final class ParkListViewModel: ObservableObject {
         }
     }
 
+    func onParkRated(_ park: Park, rating: Int) {
+        park.rating = Int16(rating)
+        do {
+            try parkRepository.save()
+        } catch {
+            print(error)
+        }
+    }
+
     private func insertInitialDataIfNeeded() {
         Task {
             do {
