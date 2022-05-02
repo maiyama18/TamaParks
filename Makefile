@@ -1,7 +1,7 @@
 .PHONY: format
 format:
-	mint run swiftformat .
+	/opt/homebrew/bin/mint run swiftformat .
 
 .PHONY: gen
 gen:
-	mint run swiftgen
+	/opt/homebrew/bin/mint run swiftgen

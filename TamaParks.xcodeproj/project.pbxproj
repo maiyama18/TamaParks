@@ -81,6 +81,7 @@
 				3862476B281E7E2900065D07 /* Sources */,
 				3862476C281E7E2900065D07 /* Frameworks */,
 				3862476D281E7E2900065D07 /* Resources */,
+				38C66400281F816200363594 /* Apply Format */,
 			);
 			buildRules = (
 			);
@@ -137,6 +138,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		38C66400281F816200363594 /* Apply Format */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Apply Format";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make format\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3862476B281E7E2900065D07 /* Sources */ = {
