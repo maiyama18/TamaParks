@@ -3,9 +3,21 @@ import UICore
 import UIKit
 
 public final class ParkListViewController: UIViewController {
-    private let viewModel: ParkListViewModel = .init()
+    private let viewModel: ParkListViewModel
 
     private var subscription: Task<Void, Never>?
+
+    @MainActor
+    public init() {
+        viewModel = .init()
+
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     deinit {
         subscription?.cancel()
