@@ -33,7 +33,9 @@ let package = Package(
         ),
         .target(
             name: "UICore",
-            dependencies: []
+            dependencies: [
+                "Resources",
+            ]
         ),
         .target(
             name: "Repositories",

@@ -20,6 +20,13 @@ public enum L10n {
     }
   }
 
+  public enum Common {
+    /// キャンセル
+    public static let cancel = L10n.tr("Localizable", "common.cancel")
+    /// 削除
+    public static let delete = L10n.tr("Localizable", "common.delete")
+  }
+
   public enum ParkList {
     /// 未訪問
     public static let unvisited = L10n.tr("Localizable", "park_list.unvisited")
