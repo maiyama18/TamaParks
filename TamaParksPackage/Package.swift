@@ -34,7 +34,9 @@ let package = Package(
         ),
         .target(
             name: "MapFeature",
-            dependencies: []
+            dependencies: [
+                "UICore",
+            ]
         ),
         .target(
             name: "UICore",
