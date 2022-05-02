@@ -72,7 +72,7 @@ public final class ParkRepository: NSObject, ParkRepositoryProtocol {
 
 extension ParkRepository: NSFetchedResultsControllerDelegate {
     public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        guard let visitings = controller.fetchedObjects as? [Park] else { return }
-        parksSubject.send(visitings)
+        guard let parks = controller.fetchedObjects as? [Park] else { return }
+        parksSubject.send(parks)
     }
 }
