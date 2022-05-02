@@ -28,6 +28,10 @@ public enum L10n {
   }
 
   public enum ParkList {
+    /// 検索
+    public static let searchPlaceholder = L10n.tr("Localizable", "park_list.search_placeholder")
+    /// 多摩公園ラリー
+    public static let title = L10n.tr("Localizable", "park_list.title")
     /// 未訪問
     public static let unvisited = L10n.tr("Localizable", "park_list.unvisited")
   }

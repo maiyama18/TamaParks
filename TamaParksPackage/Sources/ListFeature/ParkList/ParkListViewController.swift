@@ -26,9 +26,25 @@ public final class ParkListViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
 
+        setupTitle()
+        setupSearchController()
         subscribeEvents()
         viewModel.onViewLoaded()
         hostSwiftUIView(ParkListScreen(viewModel: viewModel))
+    }
+
+    private func setupTitle() {
+        navigationItem.title = L10n.ParkList.title
+    }
+
+    private func setupSearchController() {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.placeholder = L10n.ParkList.searchPlaceholder
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
 
     private func subscribeEvents() {
@@ -44,5 +60,12 @@ public final class ParkListViewController: UIViewController {
                 }
             }
         }
+    }
+}
+
+extension ParkListViewController: UISearchResultsUpdating {
+    public func updateSearchResults(for searchController: UISearchController) {
+        guard let query = searchController.searchBar.text else { return }
+        viewModel.onQueryChanged(query)
     }
 }

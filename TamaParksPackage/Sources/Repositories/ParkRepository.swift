@@ -7,6 +7,7 @@ public protocol ParkRepositoryProtocol {
     func insertInitialDataIfNeeded(_ properties: [[String: Any]]) async throws
     func publisher() -> AnyPublisher<[Park], Never>
     func save() throws
+    func changeSearchQuery(_ query: String)
 }
 
 public final class ParkRepository: NSObject, ParkRepositoryProtocol {
@@ -66,6 +67,20 @@ public final class ParkRepository: NSObject, ParkRepositoryProtocol {
             print(error)
             viewContext.rollback()
             throw RepositoryError.saveFailed
+        }
+    }
+
+    public func changeSearchQuery(_ query: String) {
+        NSFetchedResultsController<Park>.deleteCache(withName: nil)
+        fetchedResultsController.fetchRequest.predicate = query.isEmpty
+            ? nil
+            : NSPredicate(format: "(%K CONTAINS %@) OR (%K CONTAINS %@)", #keyPath(Park.name), query, #keyPath(Park.kana), query)
+        do {
+            try fetchedResultsController.performFetch()
+            guard let parks = fetchedResultsController.fetchedObjects else { return }
+            parksSubject.send(parks)
+        } catch {
+            print(error)
         }
     }
 }

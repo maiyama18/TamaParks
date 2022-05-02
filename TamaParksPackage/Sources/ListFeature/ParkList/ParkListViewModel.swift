@@ -65,6 +65,10 @@ final class ParkListViewModel: ObservableObject {
         }
     }
 
+    func onQueryChanged(_ query: String) {
+        parkRepository.changeSearchQuery(query)
+    }
+
     private func insertInitialDataIfNeeded() {
         Task {
             do {
