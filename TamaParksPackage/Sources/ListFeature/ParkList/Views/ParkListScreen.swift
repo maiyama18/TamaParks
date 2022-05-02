@@ -11,6 +11,11 @@ struct ParkListScreen: View {
                         park: park,
                         onRatingTapped: { _ in }
                     )
+                    .id(park.viewID)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        viewModel.onParkTapped(park)
+                    }
                 }
             }
         }

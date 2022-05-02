@@ -28,6 +28,7 @@ let package = Package(
                 "UICore",
                 "Repositories",
                 "Persistence",
+                "Resources",
             ]
         ),
         .target(

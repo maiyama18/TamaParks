@@ -1,14 +1,21 @@
 import Combine
+import Foundation
 import Persistence
 import Repositories
 
 @MainActor
 final class ParkListViewModel: ObservableObject {
-    @Published var parks: [Park] = [] {
-        didSet {
-            print("[DEBUG] \(parks.count) parks")
-        }
+    enum Event {
+        case showUnVisitConfirmation(park: Park)
     }
+
+    @Published var parks: [Park] = []
+
+    var events: AnyPublisher<Event, Never> {
+        eventSubject.eraseToAnyPublisher()
+    }
+
+    private let eventSubject: PassthroughSubject<Event, Never> = .init()
 
     private let parkRepository: ParkRepositoryProtocol
 
@@ -24,6 +31,29 @@ final class ParkListViewModel: ObservableObject {
 
     func onViewLoaded() {
         insertInitialDataIfNeeded()
+    }
+
+    func onParkTapped(_ park: Park) {
+        if park.visited {
+            eventSubject.send(.showUnVisitConfirmation(park: park))
+        } else {
+            park.visitedAt = Date()
+            do {
+                try parkRepository.save()
+            } catch {
+                print(error)
+            }
+        }
+    }
+
+    func onParkUnVisitConfirmed(_ park: Park) {
+        park.visitedAt = nil
+        park.rating = 0
+        do {
+            try parkRepository.save()
+        } catch {
+            print(error)
+        }
     }
 
     private func insertInitialDataIfNeeded() {

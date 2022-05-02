@@ -11,6 +11,15 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 public enum L10n {
 
+  public enum Alert {
+    public enum UnVisit {
+      /// 「%@」に訪れた記録を削除しますか？
+      public static func message(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "alert.unVisit.message", String(describing: p1))
+      }
+    }
+  }
+
   public enum ParkList {
     /// 未訪問
     public static let unvisited = L10n.tr("Localizable", "park_list.unvisited")

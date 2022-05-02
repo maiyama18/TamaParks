@@ -1,3 +1,5 @@
 "tab_title.list" = "一覧";
 
 "park_list.unvisited" = "未訪問";
+
+"alert.unVisit.message" = "「%@」に訪れた記録を削除しますか？";

@@ -6,6 +6,7 @@ import Persistence
 public protocol ParkRepositoryProtocol {
     func insertInitialDataIfNeeded(_ properties: [[String: Any]]) async throws
     func publisher() -> AnyPublisher<[Park], Never>
+    func save() throws
 }
 
 public final class ParkRepository: NSObject, ParkRepositoryProtocol {
@@ -23,8 +24,6 @@ public final class ParkRepository: NSObject, ParkRepositoryProtocol {
         request.sortDescriptors = [
             NSSortDescriptor(keyPath: \Park.kana, ascending: true),
         ]
-        print("request \(request)")
-        print("context \(persistentProvider.persistentContainer.viewContext)")
         fetchedResultsController = NSFetchedResultsController(
             fetchRequest: request,
             managedObjectContext: persistentProvider.persistentContainer.viewContext,
@@ -49,9 +48,7 @@ public final class ParkRepository: NSObject, ParkRepositoryProtocol {
         try await persistentProvider.persistentContainer.performBackgroundTask { context in
             let fetchRequest: NSFetchRequest<Park> = Park.fetchRequest()
             fetchRequest.resultType = .countResultType
-            let parksCount = try context.count(for: fetchRequest)
-            print("parksCount \(parksCount)")
-            guard parksCount == 0 else { return }
+            guard try context.count(for: fetchRequest) == 0 else { return }
 
             let insertRequest = NSBatchInsertRequest(entity: Park.entity(), objects: properties)
             try context.execute(insertRequest)
@@ -60,6 +57,16 @@ public final class ParkRepository: NSObject, ParkRepositoryProtocol {
 
     public func publisher() -> AnyPublisher<[Park], Never> {
         parksSubject.eraseToAnyPublisher()
+    }
+
+    public func save() throws {
+        do {
+            try viewContext.save()
+        } catch {
+            print(error)
+            viewContext.rollback()
+            throw RepositoryError.saveFailed
+        }
     }
 }
 

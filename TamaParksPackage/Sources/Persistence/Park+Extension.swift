@@ -9,4 +9,8 @@ public extension Park {
     var visited: Bool {
         visitedAt != nil
     }
+
+    var viewID: String {
+        "\(objectID).\(visitedAt?.description ?? "nil").\(rating)"
+    }
 }
