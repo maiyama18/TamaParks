@@ -1,10 +1,12 @@
 import ListFeature
+import MapFeature
 import Resources
 import UIKit
 
 public final class MainTabViewController: UITabBarController {
     enum Tab: Int {
         case list
+        case map
     }
 
     override public func viewDidLoad() {
@@ -21,7 +23,14 @@ public final class MainTabViewController: UITabBarController {
             tag: Tab.list.rawValue
         )
 
-        viewControllers = [listVC]
+        let mapVC = ParkMapViewController()
+        mapVC.tabBarItem = UITabBarItem(
+            title: "マップ",
+            image: UIImage(systemName: "map"),
+            tag: Tab.map.rawValue
+        )
+
+        viewControllers = [listVC, mapVC]
         selectedIndex = Tab.list.rawValue
     }
 }

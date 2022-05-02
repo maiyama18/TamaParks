@@ -19,6 +19,7 @@ let package = Package(
             name: "App",
             dependencies: [
                 "ListFeature",
+                "MapFeature",
                 "Resources",
             ]
         ),
@@ -30,6 +31,10 @@ let package = Package(
                 "Persistence",
                 "Resources",
             ]
+        ),
+        .target(
+            name: "MapFeature",
+            dependencies: []
         ),
         .target(
             name: "UICore",
