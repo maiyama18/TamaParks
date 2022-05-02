@@ -1,1 +1,2 @@
 --exclude TamaParksPackage/Sources/Resources/Generated
+--swiftversion 5.6

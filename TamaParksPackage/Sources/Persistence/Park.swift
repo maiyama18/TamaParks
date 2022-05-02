@@ -4,7 +4,7 @@ import Foundation
 @objc(Park)
 public final class Park: NSManagedObject {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Park> {
-        return NSFetchRequest<Park>(entityName: "Park")
+        NSFetchRequest<Park>(entityName: "Park")
     }
 
     @NSManaged public var kana: String
