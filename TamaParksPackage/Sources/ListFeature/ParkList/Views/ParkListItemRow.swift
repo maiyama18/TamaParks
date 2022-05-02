@@ -24,7 +24,7 @@ struct ParkListItemRow: View {
                 .frame(width: 12)
 
             VStack(alignment: .leading, spacing: 2) {
-                Text(park.name!)
+                Text(park.name)
                     .font(.headline)
                     .lineLimit(2)
                     .minimumScaleFactor(0.5)
@@ -58,6 +58,9 @@ struct ParkListItemRow: View {
 
 struct ParkListItemRow_Previews: PreviewProvider {
     static var previews: some View {
-        ParkListItemRow(park: Park(name: "多摩中央公園", kana: "たまちゅうおうこうえん"), onRatingTapped: { _ in })
+        ParkListItemRow(
+            park: Park(name: "多摩中央公園", kana: "たまちゅうおうこうえん"),
+            onRatingTapped: { _ in }
+        )
     }
 }

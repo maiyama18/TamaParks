@@ -6,7 +6,7 @@ struct ParkListScreen: View {
     var body: some View {
         ScrollView {
             LazyVStack(spacing: 0) {
-                ForEach(viewModel.parks, id: \.id) { park in
+                ForEach(viewModel.parks, id: \.objectID) { park in
                     ParkListItemRow(
                         park: park,
                         onRatingTapped: { _ in }
