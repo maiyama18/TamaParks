@@ -19,7 +19,12 @@ struct ParkMapScreen: View {
                         longitude: park.longitude
                     )
                 ) {
-                    Text(park.name)
+                    ParkMarker(
+                        name: park.name,
+                        rating: Int(park.rating),
+                        metaDataVisible: viewModel.parkMetaDataVisible,
+                        visited: park.visited
+                    )
                 }
             }
         )

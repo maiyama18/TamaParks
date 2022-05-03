@@ -2,25 +2,28 @@ import SwiftUI
 
 public struct RatingStarsView: View {
     private let rating: Int
-    private let onRatingTapped: (Int) -> Void
+    private let onRatingTapped: ((Int) -> Void)?
+    private let starSize: CGFloat
 
-    public init(rating: Int, onRatingTapped: @escaping (Int) -> Void) {
+    public init(rating: Int, onRatingTapped: ((Int) -> Void)?, starSize: CGFloat = 18) {
         self.rating = rating
         self.onRatingTapped = onRatingTapped
+        self.starSize = starSize
     }
 
     public var body: some View {
         HStack(spacing: 0) {
             ForEach(1 ... 5, id: \.self) { i in
                 Image(systemName: "star")
-                    .font(.system(size: 18))
+                    .font(.system(size: starSize))
                     .symbolVariant(rating >= i ? .fill : .none)
                     .foregroundColor(.green)
                     .onTapGesture {
-                        onRatingTapped(i)
+                        onRatingTapped?(i)
                     }
             }
         }
+        .disabled(onRatingTapped == nil)
     }
 }
 

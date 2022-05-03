@@ -12,11 +12,14 @@ private let tamaLocation = CLLocationCoordinate2D(
 final class ParkMapViewModel: ObservableObject {
     @Published var region: MKCoordinateRegion = .init(
         center: tamaLocation,
-        latitudinalMeters: 2000,
-        longitudinalMeters: 2000
+        span: .init(latitudeDelta: 0.02, longitudeDelta: 0.02)
     )
 
     @Published var parks: [Park] = []
+
+    var parkMetaDataVisible: Bool {
+        region.span.longitudeDelta < 0.015
+    }
 
     private let parkRepository: ParkRepositoryProtocol
 
