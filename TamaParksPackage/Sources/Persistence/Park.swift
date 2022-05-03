@@ -9,6 +9,9 @@ public final class Park: NSManagedObject {
 
     @NSManaged public var kana: String
     @NSManaged public var name: String
+    @NSManaged public var area: Double
+    @NSManaged public var latitude: Double
+    @NSManaged public var longitude: Double
     @NSManaged public var rating: Int16
     @NSManaged public var visitedAt: Date?
 
@@ -29,3 +32,5 @@ public extension Park {
         "\(objectID).\(visitedAt?.description ?? "nil").\(rating)"
     }
 }
+
+extension Park: Identifiable {}
