@@ -54,6 +54,12 @@ public final class ParkRepository: NSObject, ParkRepositoryProtocol {
             let insertRequest = NSBatchInsertRequest(entity: Park.entity(), objects: properties)
             try context.execute(insertRequest)
         }
+
+        // FetchedResultController への通知のために無意味な変更を実行する
+        try fetchedResultsController.performFetch()
+        guard let parks = fetchedResultsController.fetchedObjects, parks.count > 0 else { throw RepositoryError.initializationFailed }
+        parks[0].rating = 0
+        try save()
     }
 
     public func publisher() -> AnyPublisher<[Park], Never> {
