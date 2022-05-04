@@ -1,3 +1,4 @@
+import Resources
 import SwiftUI
 
 public struct RatingStarsView: View {
@@ -15,9 +16,9 @@ public struct RatingStarsView: View {
         HStack(spacing: 0) {
             ForEach(1 ... 5, id: \.self) { i in
                 Image(systemName: "star")
-                    .font(.system(size: starSize))
+                    .font(.system(size: starSize).bold())
                     .symbolVariant(rating >= i ? .fill : .none)
-                    .foregroundColor(.green)
+                    .foregroundColor(.parkGreen)
                     .onTapGesture {
                         onRatingTapped?(i)
                     }

@@ -1,3 +1,4 @@
+import Resources
 import SwiftUI
 import UICore
 
@@ -9,24 +10,21 @@ struct ParkMarker: View {
 
     let spacing: CGFloat = 4
     let nameFontSize: CGFloat = 14
-    let circleSize: CGFloat = 28
+    let lineWidth: CGFloat = 1.5
+    let circleSize: CGFloat = 32
     let triangleHeight: CGFloat = 4
-
-    var color: Color {
-        visited ? .green : .gray
-    }
 
     var body: some View {
         ZStack(alignment: .top) {
             Balloon()
-                .fill(color.opacity(0.8))
+                .fill(Color.parkGreen)
                 .frame(width: circleSize, height: circleSize + triangleHeight)
                 .overlay(
                     Group {
                         if metaDataVisible {
                             Text(name)
                                 .font(.system(size: nameFontSize).bold())
-                                .foregroundColor(color)
+                                .foregroundColor(.parkGreen)
                                 .fixedSize(horizontal: true, vertical: false)
                                 .overlay(
                                     Group {
@@ -42,10 +40,16 @@ struct ParkMarker: View {
                     }
                 )
 
-            Image(systemName: "leaf.fill")
-                .font(.system(size: 12))
-                .foregroundColor(.white)
-                .frame(width: circleSize, height: circleSize)
+            Circle()
+                .fill(visited ? Color.parkGreen : .white)
+                .frame(width: circleSize - lineWidth * 2, height: circleSize - lineWidth * 2)
+                .padding(.top, lineWidth)
+                .overlay(
+                    Image(systemName: visited ? "leaf.fill" : "leaf")
+                        .foregroundColor(visited ? .white : .parkGreen)
+                        .font(.system(size: 14))
+                        .offset(x: 0, y: 1)
+                )
         }
         .offset(x: 0, y: -(circleSize + triangleHeight) / 2)
     }

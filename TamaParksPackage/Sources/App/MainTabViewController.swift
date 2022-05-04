@@ -12,7 +12,12 @@ public final class MainTabViewController: UITabBarController {
     override public func viewDidLoad() {
         super.viewDidLoad()
 
+        setupAppearance()
         setupViewControllers()
+    }
+
+    private func setupAppearance() {
+        tabBar.tintColor = Asset.parkGreen.color
     }
 
     private func setupViewControllers() {

@@ -1,3 +1,11 @@
+xcassets:
+  inputs: 
+    - TamaParksPackage/Sources/Resources/Colors.xcassets
+  outputs:
+    - templateName: swift5
+      params:
+        publicAccess: true
+      output: TamaParksPackage/Sources/Resources/Generated/Colors+Generated.swift
 strings:
   inputs:
     - TamaParksPackage/Sources/Resources/Localizable.strings

@@ -33,12 +33,12 @@ struct ParkListItemRow: View {
                     Text(dateFormatter.string(from: visitedAt))
                         .font(.subheadline.monospaced())
                         .monospacedDigit()
-                        .foregroundColor(Color.green)
+                        .foregroundColor(.parkGreen)
                         .bold()
                 } else {
                     Text(L10n.ParkList.unvisited)
                         .font(.subheadline)
-                        .foregroundColor(Color.green)
+                        .foregroundColor(.parkGreen)
                 }
             }
 
@@ -52,7 +52,7 @@ struct ParkListItemRow: View {
             }
         }
         .padding()
-        .background(park.visited ? Color.green.opacity(0.2) : Color.clear)
+        .background(park.visited ? Color.parkGreen.opacity(0.2) : Color.clear)
     }
 }
 
