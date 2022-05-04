@@ -1,3 +1,4 @@
+import DetailScreen
 import Resources
 import UICore
 import UIKit
@@ -51,6 +52,8 @@ public final class ParkListViewController: UIViewController {
         subscription = Task {
             for await event in viewModel.events.values {
                 switch event {
+                case let .showParkDetail(park):
+                    showParkDetail(from: self)
                 case let .showUnVisitConfirmation(park):
                     Router.showParkUnVisitConfirmationDialog(
                         from: self,
@@ -69,3 +72,5 @@ extension ParkListViewController: UISearchResultsUpdating {
         viewModel.onQueryChanged(query)
     }
 }
+
+extension ParkListViewController: ParkDetailRouting {}

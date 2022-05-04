@@ -6,6 +6,7 @@ import Repositories
 @MainActor
 final class ParkListViewModel: ObservableObject {
     enum Event {
+        case showParkDetail(park: Park)
         case showUnVisitConfirmation(park: Park)
     }
 
@@ -34,16 +35,7 @@ final class ParkListViewModel: ObservableObject {
     }
 
     func onParkTapped(_ park: Park) {
-        if park.visited {
-            eventSubject.send(.showUnVisitConfirmation(park: park))
-        } else {
-            park.visitedAt = Date()
-            do {
-                try parkRepository.save()
-            } catch {
-                print(error)
-            }
-        }
+        eventSubject.send(.showParkDetail(park: park))
     }
 
     func onParkUnVisitConfirmed(_ park: Park) {

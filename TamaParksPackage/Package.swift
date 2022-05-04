@@ -26,6 +26,7 @@ let package = Package(
         .target(
             name: "ListFeature",
             dependencies: [
+                "DetailScreen",
                 "UICore",
                 "Repositories",
                 "Persistence",
@@ -36,8 +37,13 @@ let package = Package(
             name: "MapFeature",
             dependencies: [
                 "UICore",
+                "Repositories",
                 "Persistence",
             ]
+        ),
+        .target(
+            name: "DetailScreen",
+            dependencies: []
         ),
         .target(
             name: "UICore",
