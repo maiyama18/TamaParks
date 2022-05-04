@@ -73,6 +73,7 @@ public let initialParkDataProperties = [
     ["name": "坂下公園", "kana": "さかしたこうえん", "area": 4820.40, "latitude": 35.637450, "longitude": 139.448350],
     ["name": "山王下公園", "kana": "さんのうしたこうえん", "area": 1103.96, "latitude": 35.626160, "longitude": 139.421200],
     ["name": "山王下緑地", "kana": "さんのうしたりょくち", "area": 44771.91, "latitude": 35.627735, "longitude": 139.423229],
+    ["name": "桜ヶ丘公園", "kana": "さくらがおかこうえん", "area": 339_322.38, "latitude": 35.636885, "longitude": 139.460716],
     ["name": "さくら公園", "kana": "さくらこうえん", "area": 496.62, "latitude": 35.640588, "longitude": 139.444198],
     ["name": "桜ヶ丘１丁目緑地", "kana": "さくらがおかいっちょうめりょくち", "area": 2001.53, "latitude": 35.647340, "longitude": 139.448620],
     ["name": "新堂公園", "kana": "しんどうこうえん", "area": 2296.00, "latitude": 35.649015, "longitude": 139.435002],
