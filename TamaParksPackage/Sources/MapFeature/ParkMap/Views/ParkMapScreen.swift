@@ -1,6 +1,7 @@
 import MapKit
 import Persistence
 import SwiftUI
+import UICore
 
 struct ParkMapScreen: View {
     @ObservedObject var viewModel: ParkMapViewModel
@@ -29,6 +30,9 @@ struct ParkMapScreen: View {
                 }
             }
         )
+        .introspectMapView { mapView in
+            mapView.pointOfInterestFilter = .excludingAll
+        }
         .ignoresSafeArea(.container, edges: .top)
     }
 }

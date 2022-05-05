@@ -13,7 +13,9 @@ let package = Package(
             targets: ["App"]
         ),
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/siteline/SwiftUI-Introspect.git", exact: "0.1.4"),
+    ],
     targets: [
         .target(
             name: "App",
@@ -54,6 +56,7 @@ let package = Package(
             name: "UICore",
             dependencies: [
                 "Resources",
+                .product(name: "Introspect", package: "SwiftUI-Introspect"),
             ]
         ),
         .target(
