@@ -23,7 +23,8 @@ struct ParkMapScreen: View {
                         name: park.name,
                         rating: Int(park.rating),
                         metaDataVisible: viewModel.parkMetaDataVisible,
-                        visited: park.visited
+                        visited: park.visited,
+                        onTapped: { viewModel.onParkTapped(park) }
                     )
                 }
             }

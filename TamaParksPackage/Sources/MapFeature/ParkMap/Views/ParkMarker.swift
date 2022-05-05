@@ -7,6 +7,7 @@ struct ParkMarker: View {
     let rating: Int
     let metaDataVisible: Bool
     let visited: Bool
+    let onTapped: () -> Void
 
     let spacing: CGFloat = 4
     let nameFontSize: CGFloat = 14
@@ -50,6 +51,11 @@ struct ParkMarker: View {
                         .font(.system(size: 14))
                         .offset(x: 0, y: 1)
                 )
+        }
+        .padding()
+        .contentShape(Rectangle())
+        .onTapGesture {
+            onTapped()
         }
         .offset(x: 0, y: -(circleSize + triangleHeight) / 2)
     }

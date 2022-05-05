@@ -10,6 +10,10 @@ private let tamaLocation = CLLocationCoordinate2D(
 
 @MainActor
 final class ParkMapViewModel: ObservableObject {
+    enum Event {
+        case showParkDetail(park: Park)
+    }
+
     @Published var region: MKCoordinateRegion = .init(
         center: tamaLocation,
         span: .init(latitudeDelta: 0.02, longitudeDelta: 0.02)
@@ -21,15 +25,25 @@ final class ParkMapViewModel: ObservableObject {
         region.span.longitudeDelta < 0.015
     }
 
+    var events: AnyPublisher<Event, Never> {
+        eventSubject.eraseToAnyPublisher()
+    }
+
+    private let eventSubject: PassthroughSubject<Event, Never> = .init()
+
     private let parkRepository: ParkRepositoryProtocol
 
     init(parkRepository: ParkRepositoryProtocol = ParkRepository()) {
         self.parkRepository = parkRepository
 
-        Task {
+        Task { [weak self, parkRepository] in
             for await parks in parkRepository.publisher().values {
-                self.parks = parks
+                self?.parks = parks
             }
         }
+    }
+
+    func onParkTapped(_ park: Park) {
+        eventSubject.send(.showParkDetail(park: park))
     }
 }
