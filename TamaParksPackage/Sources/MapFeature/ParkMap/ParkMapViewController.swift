@@ -38,6 +38,8 @@ public final class ParkMapViewController: UIViewController {
                 case let .showParkDetail(park):
                     guard let self = self else { return }
                     self.showParkDetail(from: self, park: park)
+                case .locationPermissionDenied:
+                    print("")
                 }
             }
         }

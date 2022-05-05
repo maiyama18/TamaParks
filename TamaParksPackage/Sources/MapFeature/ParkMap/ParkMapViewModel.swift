@@ -3,6 +3,7 @@ import Location
 import MapKit
 import Persistence
 import Repositories
+import SwiftUI
 
 private let tamaLocation = CLLocationCoordinate2D(
     latitude: 35.6371,
@@ -13,6 +14,7 @@ private let tamaLocation = CLLocationCoordinate2D(
 final class ParkMapViewModel: ObservableObject {
     enum Event {
         case showParkDetail(park: Park)
+        case locationPermissionDenied
     }
 
     @Published var region: MKCoordinateRegion = .init(
@@ -55,5 +57,19 @@ final class ParkMapViewModel: ObservableObject {
 
     func onParkTapped(_ park: Park) {
         eventSubject.send(.showParkDetail(park: park))
+    }
+
+    func onCurrentLocationButtonTapped() {
+        let (location, denied) = locationService.getLocation()
+        guard !denied else {
+            eventSubject.send(.locationPermissionDenied)
+            return
+        }
+
+        guard let location = location else { return }
+
+        withAnimation {
+            region.center = location
+        }
     }
 }
