@@ -29,10 +29,11 @@ public final class ParkDetailViewController: UIViewController {
     }
 
     private func subscribeEvents() {
-        subscription = Task {
-            for await event in viewModel.events.values {
+        subscription = Task { [weak self, events = viewModel.events] in
+            for await event in events.values {
                 switch event {
                 case let .showUnVisitConfirmation(parkName):
+                    guard let self = self else { return }
                     Router.showParkUnVisitConfirmationDialog(
                         from: self,
                         parkName: parkName,
