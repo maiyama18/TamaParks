@@ -22,9 +22,9 @@ final class ParkListViewModel: ObservableObject {
     init(parkRepository: ParkRepositoryProtocol = ParkRepository()) {
         self.parkRepository = parkRepository
 
-        Task {
+        Task { [weak self, parkRepository] in
             for await parks in parkRepository.publisher().values {
-                self.parks = parks
+                self?.parks = parks
             }
         }
     }

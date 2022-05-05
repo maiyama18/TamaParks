@@ -58,7 +58,9 @@ public final class ParkRepository: NSObject, ParkRepositoryProtocol {
         // FetchedResultController への通知のために無意味な変更を実行する
         try fetchedResultsController.performFetch()
         guard let parks = fetchedResultsController.fetchedObjects, parks.count > 0 else { throw RepositoryError.initializationFailed }
-        parks[0].rating = 0
+        for park in parks {
+            park.rating = 0
+        }
         try save()
     }
 
