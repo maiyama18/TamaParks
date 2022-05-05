@@ -20,8 +20,6 @@ struct ParkDetailScreen: View {
                     starSize: 28
                 )
             }
-
-            Spacer()
         }
         .padding(.horizontal, 24)
         .padding(.top, 36)
