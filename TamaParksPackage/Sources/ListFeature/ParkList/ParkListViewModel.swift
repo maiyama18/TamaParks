@@ -7,7 +7,6 @@ import Repositories
 final class ParkListViewModel: ObservableObject {
     enum Event {
         case showParkDetail(park: Park)
-        case showUnVisitConfirmation(park: Park)
     }
 
     @Published var parks: [Park] = []
@@ -36,25 +35,6 @@ final class ParkListViewModel: ObservableObject {
 
     func onParkTapped(_ park: Park) {
         eventSubject.send(.showParkDetail(park: park))
-    }
-
-    func onParkUnVisitConfirmed(_ park: Park) {
-        park.visitedAt = nil
-        park.rating = 0
-        do {
-            try parkRepository.save()
-        } catch {
-            print(error)
-        }
-    }
-
-    func onParkRated(_ park: Park, rating: Int) {
-        park.rating = Int16(rating)
-        do {
-            try parkRepository.save()
-        } catch {
-            print(error)
-        }
     }
 
     func onQueryChanged(_ query: String) {

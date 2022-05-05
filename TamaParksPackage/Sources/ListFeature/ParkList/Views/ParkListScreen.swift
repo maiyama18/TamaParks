@@ -8,8 +8,7 @@ struct ParkListScreen: View {
             LazyVStack(spacing: 0) {
                 ForEach(viewModel.parks, id: \.objectID) { park in
                     ParkListItemRow(
-                        park: park,
-                        onRatingTapped: { rating in viewModel.onParkRated(park, rating: rating) }
+                        park: park
                     )
                     .id(park.viewID)
                     .contentShape(Rectangle())

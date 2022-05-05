@@ -11,7 +11,6 @@ let dateFormatter: DateFormatter = {
 
 struct ParkListItemRow: View {
     let park: Park
-    let onRatingTapped: (Int) -> Void
 
     var body: some View {
         HStack(spacing: 0) {
@@ -47,7 +46,7 @@ struct ParkListItemRow: View {
             if park.visited {
                 RatingStarsView(
                     rating: Int(park.rating),
-                    onRatingTapped: { rating in onRatingTapped(rating) }
+                    onRatingTapped: nil
                 )
             }
         }
@@ -59,8 +58,7 @@ struct ParkListItemRow: View {
 struct ParkListItemRow_Previews: PreviewProvider {
     static var previews: some View {
         ParkListItemRow(
-            park: Park(name: "多摩中央公園", kana: "たまちゅうおうこうえん"),
-            onRatingTapped: { _ in }
+            park: Park(name: "多摩中央公園", kana: "たまちゅうおうこうえん")
         )
     }
 }
