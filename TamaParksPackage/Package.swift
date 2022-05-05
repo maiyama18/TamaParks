@@ -43,7 +43,11 @@ let package = Package(
         ),
         .target(
             name: "DetailScreen",
-            dependencies: []
+            dependencies: [
+                "UICore",
+                "Repositories",
+                "Persistence",
+            ]
         ),
         .target(
             name: "UICore",

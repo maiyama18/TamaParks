@@ -7,4 +7,4 @@
 "park_list.search_placeholder" = "検索";
 "park_list.unvisited" = "未訪問";
 
-"alert.unVisit.message" = "「%@」に訪れた記録を削除しますか？";
+"alert.unVisit.message" = "「%@」に訪れた記録を削除してもよろしいですか？";

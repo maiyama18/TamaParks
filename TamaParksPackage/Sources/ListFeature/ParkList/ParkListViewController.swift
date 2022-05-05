@@ -53,7 +53,7 @@ public final class ParkListViewController: UIViewController {
             for await event in viewModel.events.values {
                 switch event {
                 case let .showParkDetail(park):
-                    showParkDetail(from: self)
+                    showParkDetail(from: self, park: park)
                 case let .showUnVisitConfirmation(park):
                     Router.showParkUnVisitConfirmationDialog(
                         from: self,

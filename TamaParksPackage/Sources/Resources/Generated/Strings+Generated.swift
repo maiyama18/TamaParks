@@ -13,7 +13,7 @@ public enum L10n {
 
   public enum Alert {
     public enum UnVisit {
-      /// 「%@」に訪れた記録を削除しますか？
+      /// 「%@」に訪れた記録を削除してもよろしいですか？
       public static func message(_ p1: Any) -> String {
         return L10n.tr("Localizable", "alert.unVisit.message", String(describing: p1))
       }

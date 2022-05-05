@@ -1,20 +1,23 @@
+import Persistence
 import UIKit
 
+@MainActor
 public protocol ParkDetailRouting {
-    func showParkDetail(from originVC: UIViewController)
+    func showParkDetail(from originVC: UIViewController, park: Park)
 }
 
 public extension ParkDetailRouting {
-    func showParkDetail(from originVC: UIViewController) {
-        let detailVC = ParkDetailViewController()
-        let navigationVC = UINavigationController(rootViewController: detailVC)
-        navigationVC.modalPresentationStyle = .pageSheet
+    func showParkDetail(from originVC: UIViewController, park: Park) {
+        let detailVM = ParkDetailViewModel(park: park)
+        let detailVC = ParkDetailViewController(viewModel: detailVM)
+        detailVC.modalPresentationStyle = .pageSheet
 
-        if let sheet = navigationVC.sheetPresentationController {
+        if let sheet = detailVC.sheetPresentationController {
             sheet.detents = [.medium()]
             sheet.preferredCornerRadius = 24
+            sheet.prefersGrabberVisible = true
         }
 
-        originVC.present(navigationVC, animated: true)
+        originVC.present(detailVC, animated: true)
     }
 }
