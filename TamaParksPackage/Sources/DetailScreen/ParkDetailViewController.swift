@@ -34,7 +34,7 @@ public final class ParkDetailViewController: UIViewController {
                 switch event {
                 case let .showUnVisitConfirmation(parkName):
                     guard let self = self else { return }
-                    Router.showParkUnVisitConfirmationDialog(
+                    Dialogs.showParkUnVisitConfirmation(
                         from: self,
                         parkName: parkName,
                         onConfirm: { [weak self] in self?.viewModel.onParkUnVisitConfirmed() }
