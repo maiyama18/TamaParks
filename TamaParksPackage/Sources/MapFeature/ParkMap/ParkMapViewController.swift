@@ -28,6 +28,7 @@ public final class ParkMapViewController: UIViewController {
 
         subscribeEvents()
         hostSwiftUIView(ParkMapScreen(viewModel: viewModel))
+        viewModel.onViewLoaded()
     }
 
     private func subscribeEvents() {

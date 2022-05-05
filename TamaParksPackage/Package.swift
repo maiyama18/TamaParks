@@ -40,6 +40,7 @@ let package = Package(
             dependencies: [
                 "DetailScreen",
                 "UICore",
+                "Location",
                 "Repositories",
                 "Persistence",
             ]
@@ -58,6 +59,10 @@ let package = Package(
                 "Resources",
                 .product(name: "Introspect", package: "SwiftUI-Introspect"),
             ]
+        ),
+        .target(
+            name: "Location",
+            dependencies: []
         ),
         .target(
             name: "Repositories",

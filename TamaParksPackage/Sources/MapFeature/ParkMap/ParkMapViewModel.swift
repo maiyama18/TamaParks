@@ -1,4 +1,5 @@
 import Combine
+import Location
 import MapKit
 import Persistence
 import Repositories
@@ -32,15 +33,24 @@ final class ParkMapViewModel: ObservableObject {
     private let eventSubject: PassthroughSubject<Event, Never> = .init()
 
     private let parkRepository: ParkRepositoryProtocol
+    private let locationService: LocationServiceProtocol
 
-    init(parkRepository: ParkRepositoryProtocol = ParkRepository()) {
+    init(
+        parkRepository: ParkRepositoryProtocol = ParkRepository(),
+        locationService: LocationServiceProtocol = LocationService.shared
+    ) {
         self.parkRepository = parkRepository
+        self.locationService = locationService
 
         Task { [weak self, parkRepository] in
             for await parks in parkRepository.publisher().values {
                 self?.parks = parks
             }
         }
+    }
+
+    func onViewLoaded() {
+        locationService.requestPermission()
     }
 
     func onParkTapped(_ park: Park) {
