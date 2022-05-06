@@ -35,10 +35,19 @@ public enum L10n {
     public static let ok = L10n.tr("Localizable", "common.ok")
   }
 
+  public enum ParkDetail {
+    public enum Photo {
+      /// 編集
+      public static let edit = L10n.tr("Localizable", "park_detail.photo.edit")
+      /// 写真
+      public static let title = L10n.tr("Localizable", "park_detail.photo.title")
+    }
+  }
+
   public enum ParkList {
     /// 検索
     public static let searchPlaceholder = L10n.tr("Localizable", "park_list.search_placeholder")
-    /// 多摩公園ラリー(%@)
+    /// 多摩公園ラリー (%@)
     public static func title(_ p1: Any) -> String {
       return L10n.tr("Localizable", "park_list.title", String(describing: p1))
     }

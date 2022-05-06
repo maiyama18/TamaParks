@@ -16,7 +16,7 @@ struct ParkStampView: View {
                 .overlay(
                     Group {
                         if let visitedAt = visitedAt {
-                            inkView(visitedAt: visitedAt)
+                            inkView(visitedAt: visitedAt, iconSize: proxy.size.width * 0.7)
                         }
                     }
                 )
@@ -47,10 +47,10 @@ struct ParkStampView: View {
             .foregroundColor(.gray)
     }
 
-    private func inkView(visitedAt: Date) -> some View {
+    private func inkView(visitedAt: Date, iconSize: CGFloat) -> some View {
         VStack {
             Image(systemName: "leaf")
-                .font(.system(size: 180).bold())
+                .font(.system(size: iconSize).bold())
 
             Text(dateFormatter.string(from: visitedAt))
                 .font(.system(size: 24, weight: .black).monospaced())
