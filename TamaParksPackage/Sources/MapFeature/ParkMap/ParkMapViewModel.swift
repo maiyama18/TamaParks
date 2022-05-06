@@ -45,7 +45,7 @@ final class ParkMapViewModel: ObservableObject {
         self.locationService = locationService
 
         Task { [weak self, parkRepository] in
-            for await parks in parkRepository.publisher().values {
+            for await parks in parkRepository.parksPublisher().values {
                 self?.parks = parks
             }
         }

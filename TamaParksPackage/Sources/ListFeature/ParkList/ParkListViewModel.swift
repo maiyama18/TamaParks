@@ -10,6 +10,7 @@ final class ParkListViewModel: ObservableObject {
     }
 
     @Published var parks: [Park] = []
+    @Published var visitedParkCount: String = "0/\(allParkDatas.count)"
 
     var events: AnyPublisher<Event, Never> {
         eventSubject.eraseToAnyPublisher()
@@ -23,8 +24,14 @@ final class ParkListViewModel: ObservableObject {
         self.parkRepository = parkRepository
 
         Task { [weak self, parkRepository] in
-            for await parks in parkRepository.publisher().values {
+            for await parks in parkRepository.parksPublisher().values {
                 self?.parks = parks
+            }
+        }
+
+        Task { [weak self, parkRepository] in
+            for await visitedParkCount in parkRepository.visitedParkCountPublisher().values {
+                self?.visitedParkCount = "\(visitedParkCount)/\(allParkDatas.count)"
             }
         }
     }

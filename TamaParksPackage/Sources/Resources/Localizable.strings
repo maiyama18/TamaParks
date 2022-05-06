@@ -5,7 +5,7 @@
 
 "tab_title.list" = "一覧";
 
-"park_list.title" = "多摩公園ラリー";
+"park_list.title" = "多摩公園ラリー (%@)";
 "park_list.search_placeholder" = "検索";
 "park_list.unvisited" = "未訪問";
 

@@ -6,7 +6,8 @@ import UIKit
 public final class ParkListViewController: UIViewController {
     private let viewModel: ParkListViewModel
 
-    private var subscription: Task<Void, Never>?
+    private var eventSubscription: Task<Void, Never>?
+    private var visitedParkCountSubscription: Task<Void, Never>?
 
     @MainActor
     public init() {
@@ -21,20 +22,16 @@ public final class ParkListViewController: UIViewController {
     }
 
     deinit {
-        subscription?.cancel()
+        eventSubscription?.cancel()
+        visitedParkCountSubscription?.cancel()
     }
 
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        setupTitle()
         setupSearchController()
-        subscribeEvents()
+        subscribe()
         hostSwiftUIView(ParkListScreen(viewModel: viewModel))
-    }
-
-    private func setupTitle() {
-        navigationItem.title = L10n.ParkList.title
     }
 
     private func setupSearchController() {
@@ -47,14 +44,20 @@ public final class ParkListViewController: UIViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
     }
 
-    private func subscribeEvents() {
-        subscription = Task { [weak self, events = viewModel.events] in
+    private func subscribe() {
+        eventSubscription = Task { [weak self, events = viewModel.events] in
             for await event in events.values {
                 switch event {
                 case let .showParkDetail(park):
                     guard let self = self else { return }
                     self.showParkDetail(from: self, park: park)
                 }
+            }
+        }
+
+        visitedParkCountSubscription = Task { [weak self, viewModel] in
+            for await visitedParkCount in viewModel.$visitedParkCount.values {
+                self?.navigationItem.title = L10n.ParkList.title(visitedParkCount)
             }
         }
     }

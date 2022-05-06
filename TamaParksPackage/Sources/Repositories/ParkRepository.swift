@@ -4,7 +4,9 @@ import Persistence
 
 @MainActor
 public protocol ParkRepositoryProtocol {
-    func publisher() -> AnyPublisher<[Park], Never>
+    func parksPublisher() -> AnyPublisher<[Park], Never>
+    func visitedParkCountPublisher() -> AnyPublisher<Int, Never>
+
     func rate(_ park: Park, rating: Int) throws
     func visit(_ park: Park) throws
     func unVisit(_ park: Park) throws
@@ -19,7 +21,6 @@ public final class ParkRepository: NSObject, ParkRepositoryProtocol {
 
     private let filteredParkDatasSubject: CurrentValueSubject<[ParkData], Never> = .init(allParkDatas)
     private let visitingsSubject: CurrentValueSubject<[ParkVisiting], Never> = .init([])
-
     private let parksSubject: CurrentValueSubject<[Park], Never> = .init([])
 
     private var viewContext: NSManagedObjectContext {
@@ -63,8 +64,14 @@ public final class ParkRepository: NSObject, ParkRepositoryProtocol {
         }
     }
 
-    public func publisher() -> AnyPublisher<[Park], Never> {
+    public func parksPublisher() -> AnyPublisher<[Park], Never> {
         parksSubject.eraseToAnyPublisher()
+    }
+
+    public func visitedParkCountPublisher() -> AnyPublisher<Int, Never> {
+        visitingsSubject
+            .map(\.count)
+            .eraseToAnyPublisher()
     }
 
     public func rate(_ park: Park, rating: Int) throws {
