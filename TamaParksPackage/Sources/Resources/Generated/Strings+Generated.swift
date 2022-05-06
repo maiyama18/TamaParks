@@ -42,6 +42,10 @@ public enum L10n {
       /// 写真
       public static let title = L10n.tr("Localizable", "park_detail.photo.title")
     }
+    public enum Stamp {
+      /// 訪れた証にタップしてみましょう
+      public static let prompt = L10n.tr("Localizable", "park_detail.stamp.prompt")
+    }
   }
 
   public enum ParkList {

@@ -9,6 +9,7 @@
 "park_list.search_placeholder" = "検索";
 "park_list.unvisited" = "未訪問";
 
+"park_detail.stamp.prompt" = "訪れた証にタップしてみましょう";
 "park_detail.photo.title" = "写真";
 "park_detail.photo.edit" = "編集";
 

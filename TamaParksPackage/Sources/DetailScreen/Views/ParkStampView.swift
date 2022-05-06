@@ -1,3 +1,4 @@
+import Resources
 import SwiftUI
 
 struct ParkStampView: View {
@@ -30,19 +31,20 @@ struct ParkStampView: View {
             .overlay(
                 Text(parkName)
                     .font(.title.bold())
-                    .lineLimit(2)
+                    .lineLimit(1)
                     .minimumScaleFactor(0.5)
                     .overlay(
                         Group {
                             if visitedAt == nil {
-                                Text("訪れた証にタップしてスタンプを押しましょう")
+                                Text(L10n.ParkDetail.Stamp.prompt)
                                     .font(.caption)
-                                    .lineLimit(2)
+                                    .lineLimit(1)
                                     .fixedSize()
                                     .offset(x: 0, y: 32)
                             }
                         }
                     )
+                    .padding()
             )
             .foregroundColor(.gray)
     }
