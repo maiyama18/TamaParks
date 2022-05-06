@@ -54,11 +54,3 @@ struct ParkListItemRow: View {
         .background(park.visited ? Color.parkGreen.opacity(0.2) : Color.clear)
     }
 }
-
-struct ParkListItemRow_Previews: PreviewProvider {
-    static var previews: some View {
-        ParkListItemRow(
-            park: Park(name: "多摩中央公園", kana: "たまちゅうおうこうえん")
-        )
-    }
-}

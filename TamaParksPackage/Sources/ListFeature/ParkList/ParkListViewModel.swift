@@ -29,25 +29,11 @@ final class ParkListViewModel: ObservableObject {
         }
     }
 
-    func onViewLoaded() {
-        insertInitialDataIfNeeded()
-    }
-
     func onParkTapped(_ park: Park) {
         eventSubject.send(.showParkDetail(park: park))
     }
 
     func onQueryChanged(_ query: String) {
         parkRepository.changeSearchQuery(query)
-    }
-
-    private func insertInitialDataIfNeeded() {
-        Task {
-            do {
-                try await parkRepository.insertInitialDataIfNeeded(initialParkDataProperties)
-            } catch {
-                print(error)
-            }
-        }
     }
 }

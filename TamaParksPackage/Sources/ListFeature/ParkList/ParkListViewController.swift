@@ -30,7 +30,6 @@ public final class ParkListViewController: UIViewController {
         setupTitle()
         setupSearchController()
         subscribeEvents()
-        viewModel.onViewLoaded()
         hostSwiftUIView(ParkListScreen(viewModel: viewModel))
     }
 

@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E258" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
-    <entity name="Park" representedClassName="Park" syncable="YES">
-        <attribute name="area" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="kana" attributeType="String" defaultValueString=""/>
-        <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="name" attributeType="String" defaultValueString=""/>
+    <entity name="ParkVisiting" representedClassName="ParkVisiting" syncable="YES">
+        <attribute name="parkID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="rating" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="visitedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="visitedAt" attributeType="Date" defaultDateTimeInterval="673455600" usesScalarValueType="NO"/>
     </entity>
     <elements>
-        <element name="Park" positionX="-63" positionY="-18" width="128" height="134"/>
+        <element name="ParkVisiting" positionX="-63" positionY="-18" width="128" height="74"/>
     </elements>
 </model>

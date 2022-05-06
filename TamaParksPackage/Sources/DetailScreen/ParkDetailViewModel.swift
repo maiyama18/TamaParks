@@ -28,22 +28,18 @@ class ParkDetailViewModel: ObservableObject {
         if park.visited {
             eventSubject.send(.showUnVisitConfirmation(parkName: park.name))
         } else {
-            park.visitedAt = Date()
-        }
-
-        do {
-            try parkRepository.save()
-            objectWillChange.send()
-        } catch {
-            print(error)
+            do {
+                try parkRepository.visit(park)
+                objectWillChange.send()
+            } catch {
+                print(error)
+            }
         }
     }
 
     func onParkRated(rating: Int) {
-        park.rating = Int16(rating)
-
         do {
-            try parkRepository.save()
+            try parkRepository.rate(park, rating: rating)
             objectWillChange.send()
         } catch {
             print(error)
@@ -51,10 +47,8 @@ class ParkDetailViewModel: ObservableObject {
     }
 
     func onParkUnVisitConfirmed() {
-        park.visitedAt = nil
-        park.rating = 0
         do {
-            try parkRepository.save()
+            try parkRepository.unVisit(park)
             objectWillChange.send()
         } catch {
             print(error)

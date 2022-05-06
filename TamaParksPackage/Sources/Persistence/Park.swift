@@ -1,36 +1,39 @@
-import CoreData
 import Foundation
 
-@objc(Park)
-public final class Park: NSManagedObject {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Park> {
-        NSFetchRequest<Park>(entityName: "Park")
+public class Park {
+    public let data: ParkData
+    public var visiting: ParkVisiting?
+
+    public init(data: ParkData, visiting: ParkVisiting?) {
+        self.data = data
+        self.visiting = visiting
     }
 
-    @NSManaged public var kana: String
-    @NSManaged public var name: String
-    @NSManaged public var area: Double
-    @NSManaged public var latitude: Double
-    @NSManaged public var longitude: Double
-    @NSManaged public var rating: Int16
-    @NSManaged public var visitedAt: Date?
-
-    public convenience init(name: String, kana: String) {
-        self.init()
-
-        self.name = name
-        self.kana = kana
+    public var name: String {
+        data.name
     }
-}
 
-public extension Park {
-    var visited: Bool {
+    public var rating: Int {
+        Int(visiting?.rating ?? 0)
+    }
+
+    public var latitude: Double {
+        data.latitude
+    }
+
+    public var longitude: Double {
+        data.longitude
+    }
+
+    public var visitedAt: Date? {
+        visiting?.visitedAt
+    }
+
+    public var visited: Bool {
         visitedAt != nil
     }
-
-    var viewID: String {
-        "\(objectID).\(visitedAt?.description ?? "nil").\(rating)"
-    }
 }
 
-extension Park: Identifiable {}
+extension Park: Identifiable {
+    public var id: Int { data.id }
+}

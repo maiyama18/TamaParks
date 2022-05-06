@@ -6,11 +6,10 @@ struct ParkListScreen: View {
     var body: some View {
         ScrollView {
             LazyVStack(spacing: 0) {
-                ForEach(viewModel.parks, id: \.objectID) { park in
+                ForEach(viewModel.parks) { park in
                     ParkListItemRow(
                         park: park
                     )
-                    .id(park.viewID)
                     .contentShape(Rectangle())
                     .onTapGesture {
                         viewModel.onParkTapped(park)

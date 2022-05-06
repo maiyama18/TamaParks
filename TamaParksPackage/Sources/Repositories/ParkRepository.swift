@@ -4,15 +4,21 @@ import Persistence
 
 @MainActor
 public protocol ParkRepositoryProtocol {
-    func insertInitialDataIfNeeded(_ properties: [[String: Any]]) async throws
     func publisher() -> AnyPublisher<[Park], Never>
-    func save() throws
+    func rate(_ park: Park, rating: Int) throws
+    func visit(_ park: Park) throws
+    func unVisit(_ park: Park) throws
     func changeSearchQuery(_ query: String)
 }
 
 public final class ParkRepository: NSObject, ParkRepositoryProtocol {
     private let persistentProvider = PersistentProvider.shared
-    private let fetchedResultsController: NSFetchedResultsController<Park>
+    private let fetchedResultsController: NSFetchedResultsController<ParkVisiting>
+
+    private var cancellables: [AnyCancellable] = []
+
+    private let filteredParkDatasSubject: CurrentValueSubject<[ParkData], Never> = .init(allParkDatas)
+    private let visitingsSubject: CurrentValueSubject<[ParkVisiting], Never> = .init([])
 
     private let parksSubject: CurrentValueSubject<[Park], Never> = .init([])
 
@@ -21,9 +27,9 @@ public final class ParkRepository: NSObject, ParkRepositoryProtocol {
     }
 
     override public init() {
-        let request: NSFetchRequest<Park> = Park.fetchRequest()
+        let request: NSFetchRequest<ParkVisiting> = ParkVisiting.fetchRequest()
         request.sortDescriptors = [
-            NSSortDescriptor(keyPath: \Park.kana, ascending: true),
+            NSSortDescriptor(keyPath: \ParkVisiting.visitedAt, ascending: true),
         ]
         fetchedResultsController = NSFetchedResultsController(
             fetchRequest: request,
@@ -34,41 +40,71 @@ public final class ParkRepository: NSObject, ParkRepositoryProtocol {
 
         super.init()
 
+        filteredParkDatasSubject
+            .combineLatest(visitingsSubject)
+            .sink { parkDatas, visitings in
+                let parkIDToVisitings: [Int: ParkVisiting] = visitings.reduce(into: [:]) { dict, visiting in dict[Int(visiting.parkID)] = visiting }
+                self.parksSubject.send(
+                    parkDatas.map { parkData in
+                        Park(data: parkData, visiting: parkIDToVisitings[parkData.id])
+                    }
+                )
+            }
+            .store(in: &cancellables)
+
         fetchedResultsController.delegate = self
 
         do {
             try fetchedResultsController.performFetch()
-            guard let parks = fetchedResultsController.fetchedObjects else { return }
-            parksSubject.send(parks)
+            guard let visitings = fetchedResultsController.fetchedObjects else { return }
+            visitingsSubject.send(visitings)
         } catch {
             print(error)
         }
-    }
-
-    public func insertInitialDataIfNeeded(_ properties: [[String: Any]]) async throws {
-        try await persistentProvider.persistentContainer.performBackgroundTask { context in
-            let fetchRequest: NSFetchRequest<Park> = Park.fetchRequest()
-            fetchRequest.resultType = .countResultType
-            guard try context.count(for: fetchRequest) == 0 else { return }
-
-            let insertRequest = NSBatchInsertRequest(entity: Park.entity(), objects: properties)
-            try context.execute(insertRequest)
-        }
-
-        // FetchedResultController への通知のために無意味な変更を実行する
-        try fetchedResultsController.performFetch()
-        guard let parks = fetchedResultsController.fetchedObjects, parks.count > 0 else { throw RepositoryError.initializationFailed }
-        for park in parks {
-            park.rating = 0
-        }
-        try save()
     }
 
     public func publisher() -> AnyPublisher<[Park], Never> {
         parksSubject.eraseToAnyPublisher()
     }
 
-    public func save() throws {
+    public func rate(_ park: Park, rating: Int) throws {
+        guard let visiting = park.visiting else {
+            throw RepositoryError.invalidState
+        }
+
+        visiting.rating = Int16(rating)
+        try save()
+    }
+
+    public func visit(_ park: Park) throws {
+        guard park.visiting == nil else {
+            throw RepositoryError.invalidState
+        }
+
+        let visiting = ParkVisiting.from(parkID: Int16(park.data.id), rating: 0, visitedAt: Date(), context: viewContext)
+        try save()
+        park.visiting = visiting
+    }
+
+    public func unVisit(_ park: Park) throws {
+        guard let visiting = park.visiting else {
+            throw RepositoryError.invalidState
+        }
+
+        viewContext.delete(visiting)
+        try save()
+        park.visiting = nil
+    }
+
+    public func changeSearchQuery(_ query: String) {
+        filteredParkDatasSubject.send(
+            query.isEmpty
+                ? allParkDatas
+                : allParkDatas.filter { $0.kana.contains(query) || $0.name.contains(query) }
+        )
+    }
+
+    private func save() throws {
         do {
             try viewContext.save()
         } catch {
@@ -77,25 +113,11 @@ public final class ParkRepository: NSObject, ParkRepositoryProtocol {
             throw RepositoryError.saveFailed
         }
     }
-
-    public func changeSearchQuery(_ query: String) {
-        NSFetchedResultsController<Park>.deleteCache(withName: nil)
-        fetchedResultsController.fetchRequest.predicate = query.isEmpty
-            ? nil
-            : NSPredicate(format: "(%K CONTAINS %@) OR (%K CONTAINS %@)", #keyPath(Park.name), query, #keyPath(Park.kana), query)
-        do {
-            try fetchedResultsController.performFetch()
-            guard let parks = fetchedResultsController.fetchedObjects else { return }
-            parksSubject.send(parks)
-        } catch {
-            print(error)
-        }
-    }
 }
 
 extension ParkRepository: NSFetchedResultsControllerDelegate {
     public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        guard let parks = controller.fetchedObjects as? [Park] else { return }
-        parksSubject.send(parks)
+        guard let visitings = controller.fetchedObjects as? [ParkVisiting] else { return }
+        visitingsSubject.send(visitings)
     }
 }
