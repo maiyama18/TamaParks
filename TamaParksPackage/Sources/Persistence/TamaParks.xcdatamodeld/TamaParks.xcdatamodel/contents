@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E258" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="ParkPhoto" representedClassName="ParkPhoto" syncable="YES">
+        <attribute name="image" optional="YES" attributeType="Transformable" valueTransformerName="UIImageTransformer" customClassName="UIImage"/>
+        <attribute name="takenAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="visiting" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="ParkVisiting" inverseName="photos" inverseEntity="ParkVisiting"/>
+    </entity>
     <entity name="ParkVisiting" representedClassName="ParkVisiting" syncable="YES">
         <attribute name="parkID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="rating" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="visitedAt" attributeType="Date" defaultDateTimeInterval="673455600" usesScalarValueType="NO"/>
+        <relationship name="photos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ParkPhoto" inverseName="visiting" inverseEntity="ParkPhoto"/>
     </entity>
     <elements>
-        <element name="ParkVisiting" positionX="-63" positionY="-18" width="128" height="74"/>
+        <element name="ParkVisiting" positionX="-63" positionY="-18" width="128" height="89"/>
+        <element name="ParkPhoto" positionX="-63" positionY="9" width="128" height="74"/>
     </elements>
 </model>

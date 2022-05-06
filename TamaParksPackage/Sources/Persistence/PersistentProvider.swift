@@ -6,6 +6,8 @@ public final class PersistentProvider {
     public let persistentContainer: NSPersistentCloudKitContainer
 
     private init() {
+        ValueTransformer.setValueTransformer(UIImageTransformer(), forName: .init(rawValue: "UIImageTransformer"))
+
         let modelURL = Bundle.module.url(forResource: "TamaParks", withExtension: "momd")!
         let model = NSManagedObjectModel(contentsOf: modelURL)!
         persistentContainer = NSPersistentCloudKitContainer(name: "TamaParks", managedObjectModel: model)
