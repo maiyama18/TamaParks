@@ -2,7 +2,8 @@ import CoreLocation
 
 public protocol LocationServiceProtocol {
     func requestPermission()
-    func getLocation() -> (CLLocationCoordinate2D?, Bool)
+    func getLocation() -> CLLocationCoordinate2D?
+    func checkPermission() -> LocationPermission
 }
 
 public final class LocationService: LocationServiceProtocol {
@@ -18,12 +19,11 @@ public final class LocationService: LocationServiceProtocol {
         locationManager.requestWhenInUseAuthorization()
     }
 
-    public func getLocation() -> (CLLocationCoordinate2D?, Bool) {
-        guard checkPermission() != .denied else { return (nil, true) }
-        return (locationManager.location?.coordinate, false)
+    public func getLocation() -> CLLocationCoordinate2D? {
+        locationManager.location?.coordinate
     }
 
-    private func checkPermission() -> LocationPermission {
+    public func checkPermission() -> LocationPermission {
         switch locationManager.authorizationStatus {
         case .authorizedAlways, .authorizedWhenInUse:
             return .allowed

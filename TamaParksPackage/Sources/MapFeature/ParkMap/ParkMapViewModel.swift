@@ -60,16 +60,16 @@ final class ParkMapViewModel: ObservableObject {
     }
 
     func onCurrentLocationButtonTapped() {
-        let (location, denied) = locationService.getLocation()
-        guard !denied else {
+        switch locationService.checkPermission() {
+        case .allowed:
+            guard let location = locationService.getLocation() else { return }
+            withAnimation {
+                region.center = location
+            }
+        case .denied:
             eventSubject.send(.locationPermissionDenied)
-            return
-        }
-
-        guard let location = location else { return }
-
-        withAnimation {
-            region.center = location
+        case .notDetermined:
+            locationService.requestPermission()
         }
     }
 }

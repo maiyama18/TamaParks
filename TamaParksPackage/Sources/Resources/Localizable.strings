@@ -1,3 +1,5 @@
+"common.error" = "エラー";
+"common.ok" = "OK";
 "common.delete" = "削除";
 "common.cancel" = "キャンセル";
 
@@ -7,4 +9,5 @@
 "park_list.search_placeholder" = "検索";
 "park_list.unvisited" = "未訪問";
 
-"alert.unVisit.message" = "「%@」に訪れた記録を削除してもよろしいですか？";
+"alert.un_visit.message" = "「%@」に訪れた記録を削除してもよろしいですか？";
+"alert.location_permission_denied.message" = "位置情報を取得する権限がありません。「設定」アプリから許可してください。";

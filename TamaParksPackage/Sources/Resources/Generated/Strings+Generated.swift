@@ -12,10 +12,14 @@ import Foundation
 public enum L10n {
 
   public enum Alert {
+    public enum LocationPermissionDenied {
+      /// 位置情報を取得する権限がありません。「設定」アプリから許可してください。
+      public static let message = L10n.tr("Localizable", "alert.location_permission_denied.message")
+    }
     public enum UnVisit {
       /// 「%@」に訪れた記録を削除してもよろしいですか？
       public static func message(_ p1: Any) -> String {
-        return L10n.tr("Localizable", "alert.unVisit.message", String(describing: p1))
+        return L10n.tr("Localizable", "alert.un_visit.message", String(describing: p1))
       }
     }
   }
@@ -25,6 +29,10 @@ public enum L10n {
     public static let cancel = L10n.tr("Localizable", "common.cancel")
     /// 削除
     public static let delete = L10n.tr("Localizable", "common.delete")
+    /// エラー
+    public static let error = L10n.tr("Localizable", "common.error")
+    /// OK
+    public static let ok = L10n.tr("Localizable", "common.ok")
   }
 
   public enum ParkList {

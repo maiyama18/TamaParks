@@ -1,4 +1,5 @@
 import DetailScreen
+import Resources
 import UICore
 import UIKit
 
@@ -34,12 +35,12 @@ public final class ParkMapViewController: UIViewController {
     private func subscribeEvents() {
         subscription = Task { [weak self, events = viewModel.events] in
             for await event in events.values {
+                guard let self = self else { return }
                 switch event {
                 case let .showParkDetail(park):
-                    guard let self = self else { return }
                     self.showParkDetail(from: self, park: park)
                 case .locationPermissionDenied:
-                    print("")
+                    Dialogs.showErrorMessage(from: self, message: L10n.Alert.LocationPermissionDenied.message)
                 }
             }
         }
