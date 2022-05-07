@@ -15,3 +15,5 @@
 
 "alert.un_visit.message" = "「%@」に訪れた記録を削除してもよろしいですか？";
 "alert.location_permission_denied.message" = "位置情報を取得する権限がありません。「設定」アプリから許可してください。";
+"alert.camera_unavailable.message" = "カメラが利用できない端末です。";
+"alert.camera_permission_prompt.message" = "カメラを利用する権限がありません。「設定」アプリから許可してください。";

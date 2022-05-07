@@ -2,13 +2,16 @@ import Combine
 import Foundation
 import Persistence
 import Repositories
+import Resources
+import Services
 import UIKit
 
 @MainActor
 class ParkDetailViewModel: ObservableObject {
     enum Event {
         case showUnVisitConfirmation(parkName: String)
-        case showCamera
+        case launchCamera
+        case showError(message: String)
     }
 
     @Published var park: Park
@@ -20,10 +23,16 @@ class ParkDetailViewModel: ObservableObject {
     private let eventSubject: PassthroughSubject<Event, Never> = .init()
 
     private let parkRepository: ParkRepositoryProtocol
+    private let cameraService: CameraServiceProtocol
 
-    init(park: Park, parkRepository: ParkRepositoryProtocol = ParkRepository()) {
+    init(
+        park: Park,
+        parkRepository: ParkRepositoryProtocol = ParkRepository(),
+        cameraService: CameraServiceProtocol = CameraService.shared
+    ) {
         self.park = park
         self.parkRepository = parkRepository
+        self.cameraService = cameraService
     }
 
     func onStampTapped() {
@@ -58,7 +67,24 @@ class ParkDetailViewModel: ObservableObject {
     }
 
     func onCameraButtonTapped() {
-        eventSubject.send(.showCamera)
+        switch cameraService.checkPermission() {
+        case .allowed:
+            eventSubject.send(.launchCamera)
+        case .notDetermined:
+            Task {
+                let allowed = await cameraService.requestCameraPermission()
+
+                if allowed {
+                    eventSubject.send(.launchCamera)
+                } else {
+                    eventSubject.send(.showError(message: L10n.Alert.CameraPermissionPrompt.message))
+                }
+            }
+        case .denied:
+            eventSubject.send(.showError(message: L10n.Alert.CameraPermissionPrompt.message))
+        case .unAvailable:
+            eventSubject.send(.showError(message: L10n.Alert.CameraUnavailable.message))
+        }
     }
 
     func onPhotoTaken(image: UIImage) {

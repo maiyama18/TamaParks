@@ -40,7 +40,7 @@ let package = Package(
             dependencies: [
                 "DetailScreen",
                 "UICore",
-                "Location",
+                "Services",
                 "Repositories",
                 "Persistence",
             ]
@@ -51,6 +51,7 @@ let package = Package(
                 "UICore",
                 "Repositories",
                 "Persistence",
+                "Services",
                 "Resources",
             ]
         ),
@@ -62,10 +63,6 @@ let package = Package(
             ]
         ),
         .target(
-            name: "Location",
-            dependencies: []
-        ),
-        .target(
             name: "Repositories",
             dependencies: [
                 "Persistence",
@@ -73,6 +70,10 @@ let package = Package(
         ),
         .target(
             name: "Persistence",
+            dependencies: []
+        ),
+        .target(
+            name: "Services",
             dependencies: []
         ),
         .target(

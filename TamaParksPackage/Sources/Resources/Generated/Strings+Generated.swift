@@ -12,6 +12,14 @@ import Foundation
 public enum L10n {
 
   public enum Alert {
+    public enum CameraPermissionPrompt {
+      /// カメラを利用する権限がありません。「設定」アプリから許可してください。
+      public static let message = L10n.tr("Localizable", "alert.camera_permission_prompt.message")
+    }
+    public enum CameraUnavailable {
+      /// カメラが利用できない端末です。
+      public static let message = L10n.tr("Localizable", "alert.camera_unavailable.message")
+    }
     public enum LocationPermissionDenied {
       /// 位置情報を取得する権限がありません。「設定」アプリから許可してください。
       public static let message = L10n.tr("Localizable", "alert.location_permission_denied.message")

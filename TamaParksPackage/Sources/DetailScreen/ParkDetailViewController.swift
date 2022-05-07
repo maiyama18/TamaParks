@@ -39,8 +39,10 @@ public final class ParkDetailViewController: UIViewController {
                         parkName: parkName,
                         onConfirm: { [weak self] in self?.viewModel.onParkUnVisitConfirmed() }
                     )
-                case .showCamera:
+                case .launchCamera:
                     ImagePickers.showCamera(from: self)
+                case let .showError(message):
+                    Dialogs.showErrorMessage(from: self, message: message)
                 }
             }
         }

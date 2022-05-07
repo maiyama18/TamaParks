@@ -1,8 +1,8 @@
 import Combine
-import Location
 import MapKit
 import Persistence
 import Repositories
+import Services
 import SwiftUI
 
 private let tamaLocation = CLLocationCoordinate2D(
