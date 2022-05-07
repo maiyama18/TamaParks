@@ -4,6 +4,10 @@
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>マップ上に現在地を表示するために使います</string>
+	<key>NSCameraUsageDescription</key>
+	<string>公園の写真撮影に使います</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>撮影した写真をカメラライブラリに保存するために使います</string>
 	<key>CFBundleDisplayName</key>
 	<string>多摩公園ラリー</string>
 	<key>UIApplicationSceneManifest</key>

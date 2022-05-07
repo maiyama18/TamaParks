@@ -8,6 +8,7 @@ import UIKit
 class ParkDetailViewModel: ObservableObject {
     enum Event {
         case showUnVisitConfirmation(parkName: String)
+        case showCamera
     }
 
     @Published var park: Park
@@ -57,8 +58,10 @@ class ParkDetailViewModel: ObservableObject {
     }
 
     func onCameraButtonTapped() {
-        let name = ["pencil", "doc", "note", "person", "cloud", "mic"].randomElement()!
-        let image = UIImage(systemName: name)!
+        eventSubject.send(.showCamera)
+    }
+
+    func onPhotoTaken(image: UIImage) {
         do {
             try parkRepository.addPhoto(park, image: image)
             objectWillChange.send()

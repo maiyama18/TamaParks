@@ -43,12 +43,14 @@ struct ParkDetailScreen: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 72, height: 72)
+                                    .cornerRadius(12)
                             }
 
                             Rectangle()
                                 .fill(.thickMaterial)
                                 .frame(width: 72, height: 72)
-                                .overlay(Image(systemName: "camera").font(.system(size: 28)))
+                                .cornerRadius(12)
+                                .overlay(Image(systemName: "plus").font(.system(size: 28)))
                                 .onTapGesture {
                                     viewModel.onCameraButtonTapped()
                                 }
