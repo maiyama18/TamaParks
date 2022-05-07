@@ -1,6 +1,7 @@
 import Combine
 import CoreData
 import Persistence
+import UIKit
 
 @MainActor
 public protocol ParkRepositoryProtocol {
@@ -10,6 +11,7 @@ public protocol ParkRepositoryProtocol {
     func rate(_ park: Park, rating: Int) throws
     func visit(_ park: Park) throws
     func unVisit(_ park: Park) throws
+    func addPhoto(_ park: Park, image: UIImage) throws
     func changeSearchQuery(_ query: String)
 }
 
@@ -101,6 +103,15 @@ public final class ParkRepository: NSObject, ParkRepositoryProtocol {
         viewContext.delete(visiting)
         try save()
         park.visiting = nil
+    }
+
+    public func addPhoto(_ park: Park, image: UIImage) throws {
+        guard let visiting = park.visiting else {
+            throw RepositoryError.invalidState
+        }
+
+        let _ = ParkPhoto.from(image: image, takenAt: Date(), visiting: visiting, context: viewContext)
+        try save()
     }
 
     public func changeSearchQuery(_ query: String) {

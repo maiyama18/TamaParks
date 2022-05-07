@@ -2,6 +2,7 @@ import Combine
 import Foundation
 import Persistence
 import Repositories
+import UIKit
 
 @MainActor
 class ParkDetailViewModel: ObservableObject {
@@ -49,6 +50,17 @@ class ParkDetailViewModel: ObservableObject {
     func onParkUnVisitConfirmed() {
         do {
             try parkRepository.unVisit(park)
+            objectWillChange.send()
+        } catch {
+            print(error)
+        }
+    }
+
+    func onCameraButtonTapped() {
+        let name = ["pencil", "doc", "note", "person", "cloud", "mic"].randomElement()!
+        let image = UIImage(systemName: name)!
+        do {
+            try parkRepository.addPhoto(park, image: image)
             objectWillChange.send()
         } catch {
             print(error)

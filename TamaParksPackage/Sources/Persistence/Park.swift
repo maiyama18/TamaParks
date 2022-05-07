@@ -32,6 +32,14 @@ public class Park {
     public var visited: Bool {
         visitedAt != nil
     }
+
+    public var photos: [ParkPhoto] {
+        visiting?.photos.sorted(by: { $0.takenAt < $1.takenAt }) ?? []
+    }
+
+    public var primaryPhoto: ParkPhoto? {
+        photos.first
+    }
 }
 
 extension Park: Identifiable {

@@ -10,7 +10,7 @@ public final class ParkVisiting: NSManagedObject {
     @NSManaged public var parkID: Int16
     @NSManaged public var rating: Int16
     @NSManaged public var visitedAt: Date
-    @NSManaged public var photos: [ParkPhoto]
+    @NSManaged public var photos: Set<ParkPhoto>
 
     public static func from(parkID: Int16, rating: Int16, visitedAt: Date, context: NSManagedObjectContext) -> ParkVisiting {
         let visiting = ParkVisiting(context: context)

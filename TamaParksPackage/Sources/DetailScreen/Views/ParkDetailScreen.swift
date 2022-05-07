@@ -28,21 +28,30 @@ struct ParkDetailScreen: View {
 
                         Spacer()
 
-                        // TODO: 写真が１枚以上あるときのみ表示する
-                        Button(action: {}) {
-                            Text(L10n.ParkDetail.Photo.edit)
-                                .font(.callout)
+                        if !viewModel.park.photos.isEmpty {
+                            Button(action: {}) {
+                                Text(L10n.ParkDetail.Photo.edit)
+                                    .font(.callout)
+                            }
                         }
                     }
 
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
-                            ForEach(1 ... 8, id: \.self) { _ in
-                                Rectangle()
-                                    .fill(.thickMaterial)
-                                    .aspectRatio(1, contentMode: .fit)
+                            ForEach(viewModel.park.photos, id: \.objectID) { photo in
+                                Image(uiImage: photo.image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
                                     .frame(width: 72, height: 72)
                             }
+
+                            Rectangle()
+                                .fill(.thickMaterial)
+                                .frame(width: 72, height: 72)
+                                .overlay(Image(systemName: "camera").font(.system(size: 28)))
+                                .onTapGesture {
+                                    viewModel.onCameraButtonTapped()
+                                }
                         }
                     }
                 }

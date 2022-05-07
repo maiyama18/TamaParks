@@ -14,10 +14,18 @@ struct ParkListItemRow: View {
 
     var body: some View {
         HStack(spacing: 0) {
-            Rectangle()
-                .fill(.gray.opacity(0.2))
-                .cornerRadius(12)
-                .frame(width: 56, height: 56)
+            Group {
+                if let primaryPhoto = park.primaryPhoto {
+                    Image(uiImage: primaryPhoto.image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                } else {
+                    Rectangle()
+                        .fill(.gray.opacity(0.2))
+                }
+            }
+            .cornerRadius(12)
+            .frame(width: 56, height: 56)
 
             Spacer()
                 .frame(width: 12)
