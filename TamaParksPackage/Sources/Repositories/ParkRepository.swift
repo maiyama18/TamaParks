@@ -24,6 +24,7 @@ public final class ParkRepository: NSObject, ParkRepositoryProtocol {
     private var cancellables: [AnyCancellable] = []
 
     private let filteredParkDatasSubject: CurrentValueSubject<[ParkData], Never> = .init(allParkDatas)
+    private let querySubject: CurrentValueSubject<String, Never> = .init("")
     private let visitingsSubject: CurrentValueSubject<[ParkVisiting], Never> = .init([])
     private let parksSubject: CurrentValueSubject<[Park], Never> = .init([])
 
@@ -47,12 +48,24 @@ public final class ParkRepository: NSObject, ParkRepositoryProtocol {
 
         filteredParkDatasSubject
             .combineLatest(visitingsSubject)
-            .sink { parkDatas, visitings in
+            .sink { [weak self] parkDatas, visitings in
+                guard let self = self else { return }
                 let parkIDToVisitings: [Int: ParkVisiting] = visitings.reduce(into: [:]) { dict, visiting in dict[Int(visiting.parkID)] = visiting }
                 self.parksSubject.send(
                     parkDatas.map { parkData in
                         Park(data: parkData, visiting: parkIDToVisitings[parkData.id])
                     }
+                )
+            }
+            .store(in: &cancellables)
+
+        querySubject
+            .sink { [weak self] query in
+                guard let self = self else { return }
+                self.filteredParkDatasSubject.send(
+                    query.isEmpty
+                        ? allParkDatas
+                        : allParkDatas.filter { $0.kana.contains(query) || $0.name.contains(query) }
                 )
             }
             .store(in: &cancellables)
@@ -122,11 +135,7 @@ public final class ParkRepository: NSObject, ParkRepositoryProtocol {
     }
 
     public func changeSearchQuery(_ query: String) {
-        filteredParkDatasSubject.send(
-            query.isEmpty
-                ? allParkDatas
-                : allParkDatas.filter { $0.kana.contains(query) || $0.name.contains(query) }
-        )
+        querySubject.send(query)
     }
 
     private func save() throws {
