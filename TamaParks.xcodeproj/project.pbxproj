@@ -317,10 +317,14 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TamaParks/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "多摩公園ラリー";
+				INFOPLIST_KEY_NSCameraUsageDescription = "公園の写真撮影に使います";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "マップ上に現在地を表示するために使います";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "撮影した写真をカメラライブラリに保存するために使います";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -349,10 +353,14 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TamaParks/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "多摩公園ラリー";
+				INFOPLIST_KEY_NSCameraUsageDescription = "公園の写真撮影に使います";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "マップ上に現在地を表示するために使います";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "撮影した写真をカメラライブラリに保存するために使います";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
