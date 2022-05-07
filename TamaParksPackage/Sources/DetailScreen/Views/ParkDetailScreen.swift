@@ -29,9 +29,15 @@ struct ParkDetailScreen: View {
                         Spacer()
 
                         if !viewModel.park.photos.isEmpty {
-                            Button(action: {}) {
-                                Text(L10n.ParkDetail.Photo.edit)
-                                    .font(.callout)
+                            Button(action: {
+                                viewModel.isEditingPhotos.toggle()
+                            }) {
+                                Text(
+                                    viewModel.isEditingPhotos
+                                        ? L10n.ParkDetail.Photo.complete
+                                        : L10n.ParkDetail.Photo.edit
+                                )
+                                .font(.callout)
                             }
                         }
                     }
@@ -39,11 +45,31 @@ struct ParkDetailScreen: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
                             ForEach(viewModel.park.photos, id: \.objectID) { photo in
-                                Image(uiImage: photo.image)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 72, height: 72)
-                                    .cornerRadius(12)
+                                ZStack {
+                                    Image(uiImage: photo.image)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 72, height: 72)
+                                        .cornerRadius(12)
+                                        .onTapGesture {
+                                            viewModel.onDeletePhotoButtonTapped(photo)
+                                        }
+
+                                    if viewModel.isEditingPhotos {
+                                        Circle()
+                                            .fill(.red)
+                                            .frame(width: 24, height: 24)
+                                            .overlay(
+                                                Image(systemName: "minus")
+                                                    .font(.callout)
+                                                    .foregroundColor(.white)
+                                                    .fixedSize()
+                                            )
+                                            .onTapGesture {
+                                                viewModel.onDeletePhotoButtonTapped(photo)
+                                            }
+                                    }
+                                }
                             }
 
                             Rectangle()

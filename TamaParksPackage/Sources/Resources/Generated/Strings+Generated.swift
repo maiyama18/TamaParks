@@ -20,6 +20,10 @@ public enum L10n {
       /// カメラが利用できない端末です。
       public static let message = L10n.tr("Localizable", "alert.camera_unavailable.message")
     }
+    public enum DeletePhoto {
+      /// この写真を削除してもよろしいですか？
+      public static let message = L10n.tr("Localizable", "alert.delete_photo.message")
+    }
     public enum LocationPermissionDenied {
       /// 位置情報を取得する権限がありません。「設定」アプリから許可してください。
       public static let message = L10n.tr("Localizable", "alert.location_permission_denied.message")
@@ -45,6 +49,8 @@ public enum L10n {
 
   public enum ParkDetail {
     public enum Photo {
+      /// 完了
+      public static let complete = L10n.tr("Localizable", "park_detail.photo.complete")
       /// 編集
       public static let edit = L10n.tr("Localizable", "park_detail.photo.edit")
       /// 写真

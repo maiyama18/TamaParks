@@ -10,11 +10,13 @@ import UIKit
 class ParkDetailViewModel: ObservableObject {
     enum Event {
         case showUnVisitConfirmation(parkName: String)
+        case showDeletePhotoConfirmation(photo: ParkPhoto)
         case launchCamera
         case showError(message: String)
     }
 
     @Published var park: Park
+    @Published var isEditingPhotos: Bool = false
 
     var events: AnyPublisher<Event, Never> {
         eventSubject.eraseToAnyPublisher()
@@ -90,6 +92,19 @@ class ParkDetailViewModel: ObservableObject {
     func onPhotoTaken(image: UIImage) {
         do {
             try parkRepository.addPhoto(park, image: image)
+            objectWillChange.send()
+        } catch {
+            print(error)
+        }
+    }
+
+    func onDeletePhotoButtonTapped(_ photo: ParkPhoto) {
+        eventSubject.send(.showDeletePhotoConfirmation(photo: photo))
+    }
+
+    func onDeletePhotoConfirmed(_ photo: ParkPhoto) {
+        do {
+            try parkRepository.deletePhoto(photo)
             objectWillChange.send()
         } catch {
             print(error)

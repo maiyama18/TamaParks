@@ -12,6 +12,7 @@ public protocol ParkRepositoryProtocol {
     func visit(_ park: Park) throws
     func unVisit(_ park: Park) throws
     func addPhoto(_ park: Park, image: UIImage) throws
+    func deletePhoto(_ photo: ParkPhoto) throws
     func changeSearchQuery(_ query: String)
 }
 
@@ -111,6 +112,11 @@ public final class ParkRepository: NSObject, ParkRepositoryProtocol {
         }
 
         let _ = ParkPhoto.from(image: image, takenAt: Date(), visiting: visiting, context: viewContext)
+        try save()
+    }
+
+    public func deletePhoto(_ photo: ParkPhoto) throws {
+        viewContext.delete(photo)
         try save()
     }
 

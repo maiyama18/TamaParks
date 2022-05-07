@@ -1,3 +1,4 @@
+import Resources
 import UICore
 import UIKit
 
@@ -38,6 +39,13 @@ public final class ParkDetailViewController: UIViewController {
                         from: self,
                         parkName: parkName,
                         onConfirm: { [weak self] in self?.viewModel.onParkUnVisitConfirmed() }
+                    )
+                case let .showDeletePhotoConfirmation(photo):
+                    Dialogs.showDestructiveActionConfirmation(
+                        from: self,
+                        message: L10n.Alert.DeletePhoto.message,
+                        confirmationText: L10n.Common.delete,
+                        onConfirmed: { [weak self] in self?.viewModel.onDeletePhotoConfirmed(photo) }
                     )
                 case .launchCamera:
                     ImagePickers.showCamera(from: self)
