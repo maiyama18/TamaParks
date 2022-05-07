@@ -1,6 +1,6 @@
 import Combine
+import Entities
 import MapKit
-import Persistence
 import Repositories
 import Services
 import SwiftUI

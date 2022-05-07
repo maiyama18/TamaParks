@@ -65,6 +65,13 @@ let package = Package(
         .target(
             name: "Repositories",
             dependencies: [
+                "Entities",
+                "Persistence",
+            ]
+        ),
+        .target(
+            name: "Entities",
+            dependencies: [
                 "Persistence",
             ]
         ),

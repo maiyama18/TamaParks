@@ -1,3 +1,4 @@
+import Entities
 import Persistence
 import Resources
 import SwiftUI

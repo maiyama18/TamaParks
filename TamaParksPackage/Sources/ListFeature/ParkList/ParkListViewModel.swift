@@ -1,4 +1,5 @@
 import Combine
+import Entities
 import Foundation
 import Persistence
 import Repositories
