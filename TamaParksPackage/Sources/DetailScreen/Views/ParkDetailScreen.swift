@@ -30,7 +30,9 @@ struct ParkDetailScreen: View {
 
                         if !viewModel.park.photos.isEmpty {
                             Button(action: {
-                                viewModel.isEditingPhotos.toggle()
+                                withAnimation {
+                                    viewModel.isEditingPhotos.toggle()
+                                }
                             }) {
                                 Text(
                                     viewModel.isEditingPhotos
@@ -65,6 +67,7 @@ struct ParkDetailScreen: View {
                                                     .foregroundColor(.white)
                                                     .fixedSize()
                                             )
+                                            .padding()
                                             .onTapGesture {
                                                 viewModel.onDeletePhotoButtonTapped(photo)
                                             }
