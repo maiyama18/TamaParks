@@ -50,6 +50,8 @@ public final class ParkDetailViewController: UIViewController {
                     )
                 case .launchCamera:
                     ImagePickers.showCamera(from: self)
+                case let .showPhoto(photo):
+                    ImageViewers.show(from: self, image: photo.image)
                 case let .showError(message):
                     Dialogs.showErrorMessage(from: self, message: message)
                 }

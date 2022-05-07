@@ -12,6 +12,7 @@ class ParkDetailViewModel: ObservableObject {
         case showUnVisitConfirmation(parkName: String)
         case showDeletePhotoConfirmation(photo: ParkPhoto)
         case launchCamera
+        case showPhoto(photo: ParkPhoto)
         case showError(message: String)
     }
 
@@ -109,5 +110,9 @@ class ParkDetailViewModel: ObservableObject {
         } catch {
             print(error)
         }
+    }
+
+    func onPhotoTapped(_ photo: ParkPhoto) {
+        eventSubject.send(.showPhoto(photo: photo))
     }
 }

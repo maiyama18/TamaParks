@@ -52,7 +52,7 @@ struct ParkDetailScreen: View {
                                         .frame(width: 72, height: 72)
                                         .cornerRadius(12)
                                         .onTapGesture {
-                                            viewModel.onDeletePhotoButtonTapped(photo)
+                                            viewModel.onPhotoTapped(photo)
                                         }
 
                                     if viewModel.isEditingPhotos {
