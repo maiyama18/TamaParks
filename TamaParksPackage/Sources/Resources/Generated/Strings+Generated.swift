@@ -62,6 +62,23 @@ public enum L10n {
     }
   }
 
+  public enum ParkFilter {
+    /// ★１以上
+    public static let above1Star = L10n.tr("Localizable", "park_filter.above_1_star")
+    /// ★２以上
+    public static let above2Stars = L10n.tr("Localizable", "park_filter.above_2_stars")
+    /// ★３以上
+    public static let above3Stars = L10n.tr("Localizable", "park_filter.above_3_stars")
+    /// ★４以上
+    public static let above4Stars = L10n.tr("Localizable", "park_filter.above_4_stars")
+    /// ★５
+    public static let above5Stars = L10n.tr("Localizable", "park_filter.above_5_stars")
+    /// すべて
+    public static let all = L10n.tr("Localizable", "park_filter.all")
+    /// 未訪問
+    public static let notVisited = L10n.tr("Localizable", "park_filter.not_visited")
+  }
+
   public enum ParkList {
     /// 検索
     public static let searchPlaceholder = L10n.tr("Localizable", "park_list.search_placeholder")

@@ -23,6 +23,11 @@ final class ParkMapViewModel: ObservableObject {
     )
 
     @Published var parks: [Park] = []
+    @Published var parkFilter: ParkFilter = .all {
+        didSet {
+            parkRepository.changeFilter(parkFilter)
+        }
+    }
 
     var parkMetaDataVisible: Bool {
         region.span.longitudeDelta < 0.015

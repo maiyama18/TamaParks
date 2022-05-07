@@ -73,6 +73,7 @@ let package = Package(
             name: "Entities",
             dependencies: [
                 "Persistence",
+                "Resources",
             ]
         ),
         .target(

@@ -1,3 +1,4 @@
+import Entities
 import MapKit
 import Persistence
 import SwiftUI
@@ -42,13 +43,16 @@ struct ParkMapScreen: View {
                 .padding(24)
             }
             .zStack(alignment: .topTrailing) {
-                Button(action: {}) {
-                    Text("すべて")
-                        .font(.callout.bold())
-                        .padding(12)
-                        .background(.ultraThinMaterial)
-                        .cornerRadius(12)
+                Picker("", selection: $viewModel.parkFilter) {
+                    ForEach(ParkFilter.allCases, id: \.self) {
+                        Text($0.description)
+                            .font(.callout.bold())
+                    }
                 }
+                .padding(.vertical, 8)
+                .padding(.horizontal, 12)
+                .background(.ultraThinMaterial)
+                .cornerRadius(12)
                 .padding(.top, 48)
                 .padding(.trailing, 24)
             }

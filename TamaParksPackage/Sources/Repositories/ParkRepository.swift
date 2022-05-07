@@ -15,6 +15,7 @@ public protocol ParkRepositoryProtocol {
     func addPhoto(_ park: Park, image: UIImage) throws
     func deletePhoto(_ photo: ParkPhoto) throws
     func changeSearchQuery(_ query: String)
+    func changeFilter(_ filter: ParkFilter)
 }
 
 public final class ParkRepository: NSObject, ParkRepositoryProtocol {
@@ -25,6 +26,7 @@ public final class ParkRepository: NSObject, ParkRepositoryProtocol {
 
     private let filteredParkDatasSubject: CurrentValueSubject<[ParkData], Never> = .init(allParkDatas)
     private let querySubject: CurrentValueSubject<String, Never> = .init("")
+    private let filterSubject: CurrentValueSubject<ParkFilter, Never> = .init(.all)
     private let visitingsSubject: CurrentValueSubject<[ParkVisiting], Never> = .init([])
     private let parksSubject: CurrentValueSubject<[Park], Never> = .init([])
 
@@ -47,14 +49,15 @@ public final class ParkRepository: NSObject, ParkRepositoryProtocol {
         super.init()
 
         filteredParkDatasSubject
-            .combineLatest(visitingsSubject)
-            .sink { [weak self] parkDatas, visitings in
+            .combineLatest(visitingsSubject, filterSubject)
+            .sink { [weak self] parkDatas, visitings, parkFilter in
                 guard let self = self else { return }
                 let parkIDToVisitings: [Int: ParkVisiting] = visitings.reduce(into: [:]) { dict, visiting in dict[Int(visiting.parkID)] = visiting }
+                let parks = parkDatas.map { parkData in
+                    Park(data: parkData, visiting: parkIDToVisitings[parkData.id])
+                }
                 self.parksSubject.send(
-                    parkDatas.map { parkData in
-                        Park(data: parkData, visiting: parkIDToVisitings[parkData.id])
-                    }
+                    parks.filter(parkFilter.predicate)
                 )
             }
             .store(in: &cancellables)
@@ -136,6 +139,10 @@ public final class ParkRepository: NSObject, ParkRepositoryProtocol {
 
     public func changeSearchQuery(_ query: String) {
         querySubject.send(query)
+    }
+
+    public func changeFilter(_ filter: ParkFilter) {
+        filterSubject.send(filter)
     }
 
     private func save() throws {

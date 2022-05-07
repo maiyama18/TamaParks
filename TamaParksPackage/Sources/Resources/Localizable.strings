@@ -19,3 +19,11 @@
 "alert.location_permission_denied.message" = "位置情報を取得する権限がありません。「設定」アプリから許可してください。";
 "alert.camera_unavailable.message" = "カメラが利用できない端末です。";
 "alert.camera_permission_prompt.message" = "カメラを利用する権限がありません。「設定」アプリから許可してください。";
+
+"park_filter.all" = "すべて";
+"park_filter.not_visited" = "未訪問";
+"park_filter.above_1_star" = "★１以上";
+"park_filter.above_2_stars" = "★２以上";
+"park_filter.above_3_stars" = "★３以上";
+"park_filter.above_4_stars" = "★４以上";
+"park_filter.above_5_stars" = "★５";
