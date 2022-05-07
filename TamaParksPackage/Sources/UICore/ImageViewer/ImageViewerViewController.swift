@@ -24,7 +24,11 @@ public final class ImageViewerViewController: UIViewController {
         hostSwiftUIView(
             ImageViewerScreen(
                 image: image,
-                onCloseButtonTapped: { [weak self] in self?.dismiss(animated: true) }
+                onCloseButtonTapped: { [weak self] in self?.dismiss(animated: true) },
+                onShareButtonTapped: { [weak self] in
+                    guard let self = self else { return }
+                    Shares.show(from: self, item: self.image)
+                }
             )
         )
     }
