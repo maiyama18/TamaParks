@@ -113,6 +113,7 @@ class ParkDetailViewModel: ObservableObject {
     }
 
     func onPhotoTapped(_ photo: ParkPhoto) {
+        guard !isEditingPhotos else { return }
         eventSubject.send(.showPhoto(photo: photo))
     }
 }
