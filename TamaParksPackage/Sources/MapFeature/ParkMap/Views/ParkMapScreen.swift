@@ -34,12 +34,13 @@ struct ParkMapScreen: View {
             .introspectMapView { mapView in
                 mapView.pointOfInterestFilter = .excludingAll
             }
-
-            CircularButton(
-                iconSystemName: "location",
-                onTapped: { viewModel.onCurrentLocationButtonTapped() }
-            )
-            .padding(24)
+            .zStack(alignment: .bottomTrailing) {
+                CircularButton(
+                    iconSystemName: "location",
+                    onTapped: { viewModel.onCurrentLocationButtonTapped() }
+                )
+                .padding(24)
+            }
         }
         .ignoresSafeArea(.container, edges: .top)
     }

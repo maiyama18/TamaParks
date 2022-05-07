@@ -14,4 +14,8 @@ public extension View {
             customize: customize
         ))
     }
+
+    func zStack<TopContent: View>(alignment: Alignment, @ViewBuilder topContent: @escaping () -> TopContent) -> some View {
+        modifier(ZStackModifier(alignment: alignment, topContent: topContent))
+    }
 }
