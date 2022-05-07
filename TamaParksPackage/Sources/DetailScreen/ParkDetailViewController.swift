@@ -35,10 +35,11 @@ public final class ParkDetailViewController: UIViewController {
                 guard let self = self else { return }
                 switch event {
                 case let .showUnVisitConfirmation(parkName):
-                    Dialogs.showParkUnVisitConfirmation(
+                    Dialogs.showDestructiveActionConfirmation(
                         from: self,
-                        parkName: parkName,
-                        onConfirm: { [weak self] in self?.viewModel.onParkUnVisitConfirmed() }
+                        message: L10n.Alert.UnVisit.message(parkName),
+                        confirmationText: L10n.Common.delete,
+                        onConfirmed: { [weak self] in self?.viewModel.onParkUnVisitConfirmed() }
                     )
                 case let .showDeletePhotoConfirmation(photo):
                     Dialogs.showDestructiveActionConfirmation(
