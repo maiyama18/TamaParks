@@ -3,7 +3,7 @@
     <entity name="ParkPhoto" representedClassName="ParkPhoto" syncable="YES">
         <attribute name="image" optional="YES" attributeType="Transformable" valueTransformerName="UIImageTransformer" customClassName="UIImage"/>
         <attribute name="takenAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="visiting" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="ParkVisiting" inverseName="photos" inverseEntity="ParkVisiting"/>
+        <relationship name="visiting" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ParkVisiting" inverseName="photos" inverseEntity="ParkVisiting"/>
     </entity>
     <entity name="ParkVisiting" representedClassName="ParkVisiting" syncable="YES">
         <attribute name="parkID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
