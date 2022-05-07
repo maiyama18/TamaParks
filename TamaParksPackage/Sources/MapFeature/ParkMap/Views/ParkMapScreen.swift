@@ -36,7 +36,7 @@ struct ParkMapScreen: View {
             }
             .zStack(alignment: .bottomTrailing) {
                 CircularButton(
-                    iconSystemName: "location",
+                    iconSystemName: "location.fill",
                     onTapped: { viewModel.onCurrentLocationButtonTapped() }
                 )
                 .padding(24)

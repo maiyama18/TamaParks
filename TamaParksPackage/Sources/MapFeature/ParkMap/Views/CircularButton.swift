@@ -7,11 +7,11 @@ struct CircularButton: View {
     var body: some View {
         Button(action: { onTapped() }) {
             Circle()
-                .fill(Color(uiColor: .systemBackground))
+                .fill(.ultraThinMaterial)
                 .frame(width: 64, height: 64)
                 .overlay(
                     Image(systemName: iconSystemName)
-                        .font(.system(size: 28))
+                        .font(.system(size: 28).bold())
                 )
         }
     }
