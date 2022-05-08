@@ -6,7 +6,7 @@ struct ParkListScreen: View {
 
     var body: some View {
         VStack {
-            HStack(spacing: 8) {
+            HStack(spacing: 16) {
                 HStack(spacing: 2) {
                     Image(systemName: "line.3.horizontal.decrease")
                         .font(.callout.bold())
@@ -14,6 +14,19 @@ struct ParkListScreen: View {
 
                     Picker("", selection: $viewModel.parkFilter) {
                         ForEach(ParkFilter.allCases, id: \.self) {
+                            Text($0.description)
+                                .font(.callout.bold())
+                        }
+                    }
+                }
+
+                HStack(spacing: 2) {
+                    Image(systemName: "arrow.down")
+                        .font(.callout.bold())
+                        .foregroundColor(.accentColor)
+
+                    Picker("", selection: $viewModel.parkSortOrder) {
+                        ForEach(ParkSortOrder.allCases, id: \.self) {
                             Text($0.description)
                                 .font(.callout.bold())
                         }

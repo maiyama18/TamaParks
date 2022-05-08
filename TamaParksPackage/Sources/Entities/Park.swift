@@ -14,6 +14,10 @@ public class Park {
         data.name
     }
 
+    public var kana: String {
+        data.kana
+    }
+
     public var rating: Int {
         Int(visiting?.rating ?? 0)
     }

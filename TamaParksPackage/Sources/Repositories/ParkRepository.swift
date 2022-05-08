@@ -16,6 +16,7 @@ public protocol ParkRepositoryProtocol {
     func deletePhoto(_ photo: ParkPhoto) throws
     func changeSearchQuery(_ query: String)
     func changeFilter(_ filter: ParkFilter)
+    func changeSortOrder(_ sortOrder: ParkSortOrder)
 }
 
 public final class ParkRepository: NSObject, ParkRepositoryProtocol {
@@ -27,6 +28,7 @@ public final class ParkRepository: NSObject, ParkRepositoryProtocol {
     private let filteredParkDatasSubject: CurrentValueSubject<[ParkData], Never> = .init(allParkDatas)
     private let querySubject: CurrentValueSubject<String, Never> = .init("")
     private let filterSubject: CurrentValueSubject<ParkFilter, Never> = .init(.all)
+    private let sortOrderSubject: CurrentValueSubject<ParkSortOrder, Never> = .init(.aiueo)
     private let visitingsSubject: CurrentValueSubject<[ParkVisiting], Never> = .init([])
     private let parksSubject: CurrentValueSubject<[Park], Never> = .init([])
 
@@ -49,15 +51,17 @@ public final class ParkRepository: NSObject, ParkRepositoryProtocol {
         super.init()
 
         filteredParkDatasSubject
-            .combineLatest(visitingsSubject, filterSubject)
-            .sink { [weak self] parkDatas, visitings, parkFilter in
+            .combineLatest(visitingsSubject, filterSubject, sortOrderSubject)
+            .sink { [weak self] parkDatas, visitings, parkFilter, sortOrder in
                 guard let self = self else { return }
                 let parkIDToVisitings: [Int: ParkVisiting] = visitings.reduce(into: [:]) { dict, visiting in dict[Int(visiting.parkID)] = visiting }
                 let parks = parkDatas.map { parkData in
                     Park(data: parkData, visiting: parkIDToVisitings[parkData.id])
                 }
                 self.parksSubject.send(
-                    parks.filter(parkFilter.predicate)
+                    parks
+                        .filter(parkFilter.predicate)
+                        .sorted(by: sortOrder.predicate)
                 )
             }
             .store(in: &cancellables)
@@ -143,6 +147,10 @@ public final class ParkRepository: NSObject, ParkRepositoryProtocol {
 
     public func changeFilter(_ filter: ParkFilter) {
         filterSubject.send(filter)
+    }
+
+    public func changeSortOrder(_ sortOrder: ParkSortOrder) {
+        sortOrderSubject.send(sortOrder)
     }
 
     private func save() throws {

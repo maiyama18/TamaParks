@@ -18,6 +18,12 @@ final class ParkListViewModel: ObservableObject {
         }
     }
 
+    @Published var parkSortOrder: ParkSortOrder = .aiueo {
+        didSet {
+            parkRepository.changeSortOrder(parkSortOrder)
+        }
+    }
+
     var events: AnyPublisher<Event, Never> {
         eventSubject.eraseToAnyPublisher()
     }
