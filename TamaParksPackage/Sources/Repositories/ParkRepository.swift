@@ -112,7 +112,7 @@ public final class ParkRepository: NSObject, ParkRepositoryProtocol {
             throw RepositoryError.invalidState
         }
 
-        let visiting = ParkVisiting.from(parkID: Int16(park.data.id), rating: 0, visitedAt: Date(), context: viewContext)
+        let visiting = ParkVisiting.from(parkID: Int16(park.data.id), rating: 1, visitedAt: Date(), context: viewContext)
         try save()
         park.visiting = visiting
     }
