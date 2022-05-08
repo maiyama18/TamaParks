@@ -18,6 +18,12 @@ public final class MainTabViewController: UITabBarController {
 
     private func setupAppearance() {
         tabBar.tintColor = Asset.parkGreen.color
+
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithDefaultBackground()
+        tabBarAppearance.backgroundColor = .systemBackground
+        UITabBar.appearance().standardAppearance = tabBarAppearance
+        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
     }
 
     private func setupViewControllers() {
