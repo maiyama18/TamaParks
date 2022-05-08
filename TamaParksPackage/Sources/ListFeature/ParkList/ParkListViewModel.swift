@@ -12,6 +12,11 @@ final class ParkListViewModel: ObservableObject {
 
     @Published var parks: [Park] = []
     @Published var visitedParkCount: String = "0/\(allParkDatas.count)"
+    @Published var parkFilter: ParkFilter = .all {
+        didSet {
+            parkRepository.changeFilter(parkFilter)
+        }
+    }
 
     var events: AnyPublisher<Event, Never> {
         eventSubject.eraseToAnyPublisher()
