@@ -43,10 +43,16 @@ struct ParkMapScreen: View {
                 .padding(24)
             }
             .zStack(alignment: .topTrailing) {
-                Picker("", selection: $viewModel.parkFilter) {
-                    ForEach(ParkFilter.allCases, id: \.self) {
-                        Text($0.description)
-                            .font(.callout.bold())
+                HStack {
+                    Image(systemName: "line.3.horizontal.decrease")
+                        .font(.callout.bold())
+                        .foregroundColor(.accentColor)
+
+                    Picker("", selection: $viewModel.parkFilter) {
+                        ForEach(ParkFilter.allCases, id: \.self) {
+                            Text($0.description)
+                                .font(.callout.bold())
+                        }
                     }
                 }
                 .padding(.vertical, 8)
