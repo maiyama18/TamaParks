@@ -1,4 +1,5 @@
 import Resources
+import SwiftUtils
 import UICore
 import UIKit
 
@@ -35,25 +36,25 @@ public final class ParkDetailViewController: UIViewController {
                 guard let self = self else { return }
                 switch event {
                 case let .showUnVisitConfirmation(parkName):
-                    Dialogs.showDestructiveActionConfirmation(
+                    CommonRouting.showDestructiveActionConfirmation(
                         from: self,
                         message: L10n.Alert.UnVisit.message(parkName),
                         confirmationText: L10n.Common.delete,
                         onConfirmed: { [weak self] in self?.viewModel.onParkUnVisitConfirmed() }
                     )
                 case let .showDeletePhotoConfirmation(photo):
-                    Dialogs.showDestructiveActionConfirmation(
+                    CommonRouting.showDestructiveActionConfirmation(
                         from: self,
                         message: L10n.Alert.DeletePhoto.message,
                         confirmationText: L10n.Common.delete,
                         onConfirmed: { [weak self] in self?.viewModel.onDeletePhotoConfirmed(photo) }
                     )
                 case .launchCamera:
-                    ImagePickers.showCamera(from: self)
+                    CommonRouting.showCamera(from: self, allowsEditing: true)
                 case let .showPhoto(photo):
-                    ImageViewers.show(from: self, image: photo.image)
+                    CommonRouting.showImageViewer(from: self, image: photo.image)
                 case let .showError(message):
-                    Dialogs.showErrorMessage(from: self, message: message)
+                    CommonRouting.showSimpleError(from: self, message: message)
                 }
             }
         }

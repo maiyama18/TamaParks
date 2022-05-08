@@ -4,7 +4,7 @@ import Foundation
 import Persistence
 import Repositories
 import Resources
-import Services
+import SwiftUtils
 import UIKit
 
 @MainActor

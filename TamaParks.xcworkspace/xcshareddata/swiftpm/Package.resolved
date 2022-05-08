@@ -8,6 +8,15 @@
         "revision" : "f2616860a41f9d9932da412a8978fec79c06fe24",
         "version" : "0.1.4"
       }
+    },
+    {
+      "identity" : "swiftutils",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/maiyama18/SwiftUtils.git",
+      "state" : {
+        "revision" : "c0d86c284ee072a878d105ca4592eb1e7bd86353",
+        "version" : "0.1.0"
+      }
     }
   ],
   "version" : 2

@@ -1,5 +1,6 @@
 import DetailScreen
 import Resources
+import SwiftUtils
 import UICore
 import UIKit
 
@@ -40,7 +41,10 @@ public final class ParkMapViewController: UIViewController {
                 case let .showParkDetail(park):
                     self.showParkDetail(from: self, park: park)
                 case .locationPermissionDenied:
-                    Dialogs.showErrorMessage(from: self, message: L10n.Alert.LocationPermissionDenied.message)
+                    CommonRouting.showSimpleError(
+                        from: self,
+                        message: L10n.Alert.LocationPermissionDenied.message
+                    )
                 }
             }
         }

@@ -2,6 +2,7 @@ import Combine
 import CoreData
 import Entities
 import Persistence
+import SwiftUtils
 import UIKit
 
 @MainActor

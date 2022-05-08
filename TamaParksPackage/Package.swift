@@ -15,6 +15,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/siteline/SwiftUI-Introspect.git", exact: "0.1.4"),
+        .package(url: "https://github.com/maiyama18/SwiftUtils.git", exact: "0.1.0"),
     ],
     targets: [
         .target(
@@ -40,9 +41,9 @@ let package = Package(
             dependencies: [
                 "DetailScreen",
                 "UICore",
-                "Services",
                 "Repositories",
                 "Persistence",
+                .product(name: "SwiftUtils", package: "SwiftUtils"),
             ]
         ),
         .target(
@@ -51,8 +52,8 @@ let package = Package(
                 "UICore",
                 "Repositories",
                 "Persistence",
-                "Services",
                 "Resources",
+                .product(name: "SwiftUtils", package: "SwiftUtils"),
             ]
         ),
         .target(
@@ -67,6 +68,7 @@ let package = Package(
             dependencies: [
                 "Entities",
                 "Persistence",
+                .product(name: "SwiftUtils", package: "SwiftUtils"),
             ]
         ),
         .target(
@@ -78,11 +80,9 @@ let package = Package(
         ),
         .target(
             name: "Persistence",
-            dependencies: []
-        ),
-        .target(
-            name: "Services",
-            dependencies: []
+            dependencies: [
+                .product(name: "SwiftUtils", package: "SwiftUtils"),
+            ]
         ),
         .target(
             name: "Resources",

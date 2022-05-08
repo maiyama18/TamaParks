@@ -2,8 +2,8 @@ import Combine
 import Entities
 import MapKit
 import Repositories
-import Services
 import SwiftUI
+import SwiftUtils
 
 private let tamaLocation = CLLocationCoordinate2D(
     latitude: 35.6371,
