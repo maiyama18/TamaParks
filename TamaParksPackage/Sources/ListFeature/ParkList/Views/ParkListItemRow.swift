@@ -23,6 +23,11 @@ struct ParkListItemRow: View {
                 } else {
                     Rectangle()
                         .fill(.gray.opacity(0.2))
+                        .overlay(
+                            Image(systemName: "leaf.fill")
+                                .font(.system(size: 28))
+                                .foregroundColor(.white.opacity(0.75))
+                        )
                 }
             }
             .cornerRadius(12)
