@@ -19,8 +19,9 @@ struct ParkStampView: View {
                 .overlay(
                     Group {
                         if let visitedAt = visitedAt {
-                            inkView(visitedAt: visitedAt, iconSize: proxy.size.width * 0.7)
+                            inkView(visitedAt: visitedAt, iconSize: proxy.size.width * 0.6)
                                 .scaleEffect(hapticScale)
+                                .offset(x: 0, y: -16)
                         }
                     }
                     .onChange(of: visitedAt) { visitedAt in
@@ -73,6 +74,6 @@ struct ParkStampView: View {
                 .fixedSize()
         }
         .foregroundColor(.parkGreen.opacity(0.75))
-        .rotationEffect(.degrees(-10))
+        .rotationEffect(.degrees(-7.5))
     }
 }
