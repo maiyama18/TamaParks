@@ -5,6 +5,8 @@ struct ParkStampView: View {
     var parkName: String
     var visitedAt: Date?
 
+    @State private var hapticScale: CGFloat = 1
+
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYY/MM/dd HH:mm"
@@ -18,6 +20,18 @@ struct ParkStampView: View {
                     Group {
                         if let visitedAt = visitedAt {
                             inkView(visitedAt: visitedAt, iconSize: proxy.size.width * 0.7)
+                                .scaleEffect(hapticScale)
+                        }
+                    }
+                    .onChange(of: visitedAt) { visitedAt in
+                        if visitedAt != nil {
+                            withAnimation(.easeInOut(duration: 0.05).delay(0.05)) {
+                                hapticScale = 1.15
+                            }
+                            withAnimation(.easeInOut.delay(0.1)) {
+                                UINotificationFeedbackGenerator().notificationOccurred(.success)
+                                hapticScale = 1
+                            }
                         }
                     }
                 )
