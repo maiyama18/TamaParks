@@ -317,9 +317,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TamaParks/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "多摩公園ラリー";
-				INFOPLIST_KEY_NSCameraUsageDescription = "公園の写真撮影に使います";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "マップ上に現在地を表示するために使います";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "撮影した写真をカメラライブラリに保存するために使います";
+				INFOPLIST_KEY_NSCameraUsageDescription = "訪れた公園の写真・緑地を撮影するために使います。撮影した写真はデバイス内に保存され、後から閲覧することができます。";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "マップタブであなたの現在地を表示するために使います。現在地の近くの公園・緑地を訪れたいときに便利です。";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "撮影した写真をカメラライブラリに保存するために使います。";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -353,9 +353,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TamaParks/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "多摩公園ラリー";
-				INFOPLIST_KEY_NSCameraUsageDescription = "公園の写真撮影に使います";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "マップ上に現在地を表示するために使います";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "撮影した写真をカメラライブラリに保存するために使います";
+				INFOPLIST_KEY_NSCameraUsageDescription = "訪れた公園の写真・緑地を撮影するために使います。撮影した写真はデバイス内に保存され、後から閲覧することができます。";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "マップタブであなたの現在地を表示するために使います。現在地の近くの公園・緑地を訪れたいときに便利です。";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "撮影した写真をカメラライブラリに保存するために使います。";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
