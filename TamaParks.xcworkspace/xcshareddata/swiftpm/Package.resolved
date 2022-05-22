@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/maiyama18/ImageViewer.git",
       "state" : {
-        "branch" : "main",
-        "revision" : "49997c212f5b691fe38e117478fd4f724f24fff1"
+        "revision" : "49997c212f5b691fe38e117478fd4f724f24fff1",
+        "version" : "0.1.0"
       }
     },
     {
