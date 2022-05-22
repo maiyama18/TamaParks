@@ -1,3 +1,4 @@
+import ImageViewer
 import Resources
 import SwiftUtils
 import UICore
@@ -52,7 +53,7 @@ public final class ParkDetailViewController: UIViewController {
                 case .launchCamera:
                     CommonRouting.showCamera(from: self, allowsEditing: true)
                 case let .showPhoto(photo):
-                    CommonRouting.showImageViewer(from: self, image: photo.image)
+                    presentImageViewer(image: photo.image)
                 case let .showError(message):
                     CommonRouting.showSimpleError(from: self, message: message)
                 }

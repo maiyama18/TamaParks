@@ -16,6 +16,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/siteline/SwiftUI-Introspect.git", exact: "0.1.4"),
         .package(url: "https://github.com/maiyama18/SwiftUtils.git", exact: "0.1.0"),
+        .package(url: "https://github.com/maiyama18/ImageViewer.git", branch: "main"),
     ],
     targets: [
         .target(
@@ -54,6 +55,7 @@ let package = Package(
                 "Persistence",
                 "Resources",
                 .product(name: "SwiftUtils", package: "SwiftUtils"),
+                .product(name: "ImageViewer", package: "ImageViewer"),
             ]
         ),
         .target(
