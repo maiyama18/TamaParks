@@ -4,19 +4,8 @@ import Persistence
 import SwiftUI
 import UICore
 
-
 struct ParkMapScreen: View {
-    final class MapDelegate: NSObject, MKMapViewDelegate {
-        public func mapView(_ mapView: MKMapView, didAdd _: [MKAnnotationView]) {
-            let userView = mapView.view(for: mapView.userLocation)
-            userView?.isUserInteractionEnabled = false
-            userView?.isEnabled = false
-            userView?.canShowCallout = false
-        }
-    }
-    
     @ObservedObject var viewModel: ParkMapViewModel
-    private let mapDelegate: MapDelegate = .init()
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
@@ -45,7 +34,6 @@ struct ParkMapScreen: View {
             )
             .introspectMapView { mapView in
                 mapView.pointOfInterestFilter = .excludingAll
-                mapView.delegate = mapDelegate
             }
             .zStack(alignment: .bottomTrailing) {
                 CircularButton(
