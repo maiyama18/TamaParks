@@ -13,7 +13,7 @@ class ParkDetailViewModel: ObservableObject {
         case showUnVisitConfirmation(parkName: String)
         case showDeletePhotoConfirmation(photo: ParkPhoto)
         case launchCamera
-        case showPhoto(photo: ParkPhoto)
+        case showPhoto(photos: [ParkPhoto], initialIndex: Int)
         case showError(message: String)
     }
 
@@ -115,6 +115,6 @@ class ParkDetailViewModel: ObservableObject {
 
     func onPhotoTapped(_ photo: ParkPhoto) {
         guard !isEditingPhotos else { return }
-        eventSubject.send(.showPhoto(photo: photo))
+        eventSubject.send(.showPhoto(photos: park.photos, initialIndex: park.photos.firstIndex(of: photo) ?? 0))
     }
 }

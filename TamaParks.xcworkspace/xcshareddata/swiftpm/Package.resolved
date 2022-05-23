@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/maiyama18/ImageViewer.git",
       "state" : {
-        "revision" : "49997c212f5b691fe38e117478fd4f724f24fff1",
-        "version" : "0.1.0"
+        "revision" : "ff3cf9ba4bb8b7f925884b7f2a642b05f123883d",
+        "version" : "0.2.0"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/maiyama18/SwiftUtils.git",
       "state" : {
-        "revision" : "c0d86c284ee072a878d105ca4592eb1e7bd86353",
-        "version" : "0.1.0"
+        "revision" : "1685b58567393c9631b61d745f5ccd1e1c24b49f",
+        "version" : "0.1.1"
       }
     }
   ],

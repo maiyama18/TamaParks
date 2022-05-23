@@ -15,8 +15,8 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/siteline/SwiftUI-Introspect.git", exact: "0.1.4"),
-        .package(url: "https://github.com/maiyama18/SwiftUtils.git", exact: "0.1.0"),
-        .package(url: "https://github.com/maiyama18/ImageViewer.git", exact: "0.1.0"),
+        .package(url: "https://github.com/maiyama18/SwiftUtils.git", exact: "0.1.1"),
+        .package(url: "https://github.com/maiyama18/ImageViewer.git", exact: "0.2.0"),
     ],
     targets: [
         .target(

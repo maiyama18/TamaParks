@@ -52,8 +52,8 @@ public final class ParkDetailViewController: UIViewController {
                     )
                 case .launchCamera:
                     CommonRouting.showCamera(from: self, allowsEditing: true)
-                case let .showPhoto(photo):
-                    presentImageViewer(image: photo.image)
+                case let .showPhoto(photos, initialIndex):
+                    presentImageViewer(dataSources: photos.map { .uiImage($0.image) }, initialIndex: initialIndex)
                 case let .showError(message):
                     CommonRouting.showSimpleError(from: self, message: message)
                 }
